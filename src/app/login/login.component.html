@@ -1,0 +1,16 @@
+<p-card header="Login Form">
+  <div class="p-formgroup-inline">
+      <div class="p-float-label">
+          <input id="inUsername" type="text" pInputText [(ngModel)]="username"> 
+          <label for="inUsername">Username</label>
+      </div>
+      <div class="p-float-label">
+          <input id="inPassword" type="password" pInputText [(ngModel)]="password"> 
+          <label for="inPassword">Password</label>
+      </div>
+      <button pButton type="button" label="Login" icon="pi pi-check" iconPos="left" (click) = doLogin() ></button>
+  </div>
+</p-card>
+
+<p-toast position="top-center" key="tc"></p-toast>
+
