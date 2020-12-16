@@ -12,16 +12,25 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import {FieldsetModule} from 'primeng/fieldset';
 import {TabMenuModule} from 'primeng/tabmenu';
+import {ToolbarModule} from 'primeng/toolbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductComponent } from './product/product.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [					
     AppComponent,
-      LoginComponent
+      LoginComponent,
+      HomeComponent,
+      ProductsComponent,
+      ProductComponent,
+      ToolbarComponent
    ],
   imports: [
     BrowserModule,
@@ -36,7 +45,8 @@ import { LoginComponent } from './login/login.component';
     TabMenuModule,
     BrowserAnimationsModule,
     TableModule,
-    FieldsetModule
+    FieldsetModule,
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
