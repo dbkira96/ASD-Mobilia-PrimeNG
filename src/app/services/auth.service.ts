@@ -22,6 +22,7 @@ export class AuthService {
 isLogged = () => (sessionStorage.getItem("user") != null) ? true : false;
 
 
-clearAll = () => sessionStorage.removeItem("user");
+clearAll = () =>{ sessionStorage.removeItem("user")
+                  sessionStorage.removeItem("user_roles")};
 
 }

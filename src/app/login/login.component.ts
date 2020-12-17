@@ -39,4 +39,12 @@ export class LoginComponent implements OnInit {
         }
       )
     }
+
+    doLoginStub() {
+      sessionStorage.setItem("user", this.username);
+      sessionStorage.setItem("user_roles","['ROLE_USER','ROLE_ADMIN']")
+      this.isAuthenticate = true;
+      this.route.navigate(['home']);
+      
+    }
 }

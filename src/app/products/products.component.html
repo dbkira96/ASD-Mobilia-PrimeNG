@@ -1,3 +1,33 @@
-<p>
-  products works!
-</p>
+<app-toolbar></app-toolbar>
+
+<p-dataView [value]="products">
+  <p-header> 
+    <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+  </p-header>
+    <p-footer> 
+      <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+    </p-footer>
+    <ng-template let-product pTemplate="listItem">
+      <div class="p-col-12">
+          <div class="product-list-item p-d-flex p-flex-row">
+              
+              <div class="product-list-detail">
+                  <div >{{product.name}}</div>
+                  
+                 
+                  <i class="pi pi-tag product-category-icon"></i><span >{{product.category}}</span>
+              </div>
+              <div class="product-list-action p-ml-auto">
+                  <span >{{product.price}}</span>
+                  <p-button icon="pi pi-cog" label="modify"></p-button>
+                  <span ></span>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+  <ng-template let-product pTemplate="gridItem">
+      <div class="p-col-12 p-md-3">
+          {{product.category}}
+      </div>
+  </ng-template>
+</p-dataView>

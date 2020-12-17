@@ -10,21 +10,27 @@
           <p-card header="Search" subheader="Search products by category."class="p-mb-2 p-mr-2 " >
               <p-footer>
                 <div class="p-d-flex p-flex-row">
-                  <div class="p-ml-auto">GO<i class=" pi pi-arrow-right"></i></div>
+                  <div class="p-ml-auto">
+                    <button (click)= "redirect('products')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>  
+                  </div>
                 </div>
             </p-footer>  
           </p-card>
           <p-card header="Order" subheader="Create a new order." class="p-mb-2 p-mr-2" >
             <p-footer>
               <div class="p-d-flex p-flex-row">
-                <div class="p-ml-auto">GO<i class="pi pi-arrow-right"></i></div>
+                <div class="p-ml-auto">
+                  <button (click)= "redirect('home')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>
+                </div>
             </div>
             </p-footer>
           </p-card>
           <p-card header="Storage" subheader="Manage the storehouse." class="p-mb-2 p-mr-2">
             <p-footer>
                 <div class="p-d-flex p-flex-row">
-                    <div class="p-ml-auto">GO<i class="pi pi-arrow-right"></i></div>
+                    <div class="p-ml-auto">
+                      <button (click)= "redirect('products')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>
+                    </div>
                 </div>
             </p-footer>
           </p-card>

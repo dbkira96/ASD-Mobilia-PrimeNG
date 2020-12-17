@@ -13,6 +13,7 @@ import {TableModule} from 'primeng/table';
 import {FieldsetModule} from 'primeng/fieldset';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {ToolbarModule} from 'primeng/toolbar';
+import {DataViewModule} from 'primeng/dataview';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +47,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     BrowserAnimationsModule,
     TableModule,
     FieldsetModule,
-    ToolbarModule
+    ToolbarModule,
+    DataViewModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
