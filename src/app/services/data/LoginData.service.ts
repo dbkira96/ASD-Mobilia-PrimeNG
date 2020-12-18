@@ -11,13 +11,18 @@ export class LoginDataService {
 
     constructor(
       private httpClient:HttpClient
-    ) { }
+    ) {
+
+     }
 
     login(username: string, password: string): Observable<User>{
-      let params = new HttpParams();
-      params = params.set('username', username);
-      params = params.set('password', password);
+      //let params = new HttpParams();
+     // params = params.set('username', );
+      //params = params.set('password', password);
+      const params = new HttpParams({
+        fromString: `username=${username}&password=${password}`
+      });
             
-      return this.httpClient.get<User>(`${environment.API_URL}/users/login`, {params});
+      return this.httpClient.get<User>(`${environment.API_URL}/storehouse/users/login`, {params});
     }
 }

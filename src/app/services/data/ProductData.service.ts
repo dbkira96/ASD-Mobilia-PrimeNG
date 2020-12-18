@@ -11,7 +11,7 @@ export class ProductDataService {
 constructor(private HttpClient:HttpClient) { }
 
   getAllProducts(){
-    return this.HttpClient.get<Product[]>(`${environment.API_URL}/piece/products`);
+    return this.HttpClient.get<Product[]>(`${environment.API_URL}/storehouse/v1/products`);
   }
 
   getProductById(id:string){
