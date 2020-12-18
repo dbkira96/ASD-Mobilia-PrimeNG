@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       this.authService.authenticate(this.username, this.password).subscribe(
         response => {
           
-          if(response==true) {
+          if(response!=null) {
             sessionStorage.setItem("user", this.username);
             this.isAuthenticate = true;
             this.route.navigate(['home', this.username]);
