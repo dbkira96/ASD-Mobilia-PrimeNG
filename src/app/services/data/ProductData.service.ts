@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import{Product}from '../../domain/Product'
+import { environment } from '../../../environments/environment';
+import{Product}from '../../domain/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,10 @@ import{Product}from '../../domain/Product'
 export class ProductDataService {
 
 constructor(private HttpClient:HttpClient) { }
+
+  getAllProducts(){
+    return this.HttpClient.get<Product[]>(`${environment.API_URL}/piece/products`);
+  }
 
   getProductById(id:string){
     return this.HttpClient.get<Product[]>("");
@@ -24,9 +29,9 @@ constructor(private HttpClient:HttpClient) { }
   products: Product[] =[];
   getProductByNameStud(){
     
-    var product1 = new Product("1","sedia","arredamento","cucina","A-2",20);
-    var product2 = new Product("2","tavolo","esterno","cucina","B-4",30);
-    var product3 = new Product("3","vaso","arredamento","salotto","C-8",40);
+    var product1 = new Product(1,"sedia","arredamento","cucina",20,"A-2");
+    var product2 = new Product(2,"tavolo","esterno","cucina",30,"IKEA");
+    var product3 = new Product(3,"vaso","arredamento","salotto",40,"IKEA");
     this.products = [product1,product2,product3];
 
     return this.products;
