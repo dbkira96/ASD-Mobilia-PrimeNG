@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
           if(response!=null) {
             sessionStorage.setItem("user", this.username);
             this.isAuthenticate = true;
-            this.route.navigate(['home', this.username]);
+            this.route.navigate(['products']);
         }
         else {
             this.isAuthenticate = false;
