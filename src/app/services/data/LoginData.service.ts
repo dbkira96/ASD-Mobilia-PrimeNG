@@ -18,6 +18,6 @@ export class LoginDataService {
       params = params.set('username', username);
       params = params.set('password', password);
             
-      return this.httpClient.get<User>(`${environment.API_URL}/users/login`, {params});
+      return this.httpClient.get<User>(`${environment.API_URL}/storehouse/users/login`, {params});
     }
 }
