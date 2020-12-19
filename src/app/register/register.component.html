@@ -1,73 +1,80 @@
+
+<app-toolbar></app-toolbar>
+
 <div class="p-grid p-col " >
   <div  class="p-col"></div>
-  <p-card class="p-m-10" >
+  <p-card class="p-ml-10 p-mr-10" >
       
     <div class="p-formgroup-column p-col p-jc-center ">
       <p-header class="p-d-flex p-jc-center"> 
           <img src="../../assets/images/logo.png">
       </p-header>
       <div class="p-d-flex p-flex-row">
-          <div class="p-float-label p-m-4">
-            <input id="inUsername" type="text" pInputText [(ngModel)]="newAccount.userDto.username"> 
+          <div class="p-d-flex p-flex-column  p-m-2"> 
             <label for="inUsername">Username</label>
+            <input id="inUsername" type="text" pInputText [(ngModel)]="newAccount.userDto.username" > 
+           
           </div>
-          <div class="p-float-label  p-m-4">
-            <input id="inPassword" type="password" pInputText [(ngModel)]="newAccount.userDto.password"> 
+          <div class="p-d-flex p-flex-column  p-m-2">
             <label for="inPassword">Password</label>
+            <input id="inPassword" type="password" pInputText [(ngModel)]="newAccount.userDto.password"> 
+            
           </div>
       </div>
       <div class="p-d-flex p-flex-row  ">
-        <div class="p-float-label  p-m-4">
-          <input id="inEmail" type="text" pInputText [(ngModel)]="newAccount.userDto.email"> 
+        <div class="p-d-flex p-flex-column  p-m-2">
           <label for="inEmail">Email</label>
+          <input id="inEmail" type="text" pInputText [(ngModel)]="newAccount.userDto.email"> 
         </div>
         
       </div>
       <div class="p-d-flex p-flex-row  ">
-        <div class="p-float-label p-m-4">
-          <input id="inName" type="text" pInputText [(ngModel)]="newAccount.profileDto.name"> 
+        <div class="p-d-flex p-flex-column  p-m-2">
           <label for="inName">Name</label>
+          <input id="inName" type="text" pInputText [(ngModel)]="newAccount.profileDto.name"> 
+          
         </div>
-        <div class="p-float-label p-m-4">
-          <input id="inSurname" type="text" pInputText [(ngModel)]="newAccount.profileDto.surname"> 
+        <div class="p-d-flex p-flex-column  p-m-2">
           <label for="inSurname">Surname</label>
+          <input id="inSurname" type="text" pInputText [(ngModel)]="newAccount.profileDto.surname"> 
+         
         </div>
-        <div class="p-float-label p-m-4">
-          <p-dropdown [options]="genders" [(ngModel)]="newAccount.profileDto.gender" optionLabel="name" optionValue="code"></p-dropdown>
-          <label for="inGender">Gender</label>
-        </div>
+        
       </div>
-      <div class="p-d-flex p-flex-row ">
-        <div class="p-float-label p-m-4">
-          <input id="infiscal" type="text" pInputText [(ngModel)]="newAccount.profileDto.fiscalCode"> 
-          <label for="infiscal">fiscal code</label>
-        </div>
-        <div class="p-float-label p-m-4">
-          <input id="idAddress" type="text" pInputText [(ngModel)]="newAccount.profileDto.address"> 
-          <label for="inAddress">address</label>
-        </div>
-      </div>
-      <div class="p-d-flex p-flex-row ">
-        <div class="p-float-label p-m-4">
-          <input id="idDate" type="text" pInputText [(ngModel)]="newAccount.profileDto.birthdate"> 
-          <label for="inAddress">birth date</label>
-        </div>     
-        <div class="p-float-label p-m-4">
-          <input id="inPhone" type="text" pInputText [(ngModel)]="newAccount.profileDto.phone"> 
-          <label for="inPhone">phone</label>
-        </div>
-      </div>
-      <div class="p-d-flex p-flex-row  ">    
-        <div class="p-float-label p-m-4">
-          <input id="inType" type="text" pInputText [(ngModel)]="newAccount.type"> 
-          <label for="inType">type</label>
-        </div>
 
-        <div class="p-float-label p-m-4">
-          <input id="inPhoto" type="text" pInputText [(ngModel)]="newAccount.profileDto.photo"> 
-          <label for="inPhoto">photo</label>
+      <div class="p-d-flex p-flex-row  ">
+        <div class="p-d-flex p-flex-column  p-m-2">
+          <label for="birthdate">Birth date</label>
+          <p-calendar [(ngModel)]="newAccount.profileDto.birthdate" [monthNavigator]="true" [yearNavigator]="true" yearRange="1920:2019" inputId="birthdate"></p-calendar>
+          </div> 
+        <div class="p-d-flex p-flex-column  p-m-2">
+          <label for="inGender">Gender</label>
+          <p-dropdown [options]="genders" [(ngModel)]="newAccount.profileDto.gender" optionLabel="name" optionValue="code"></p-dropdown>
+          
         </div>
-      </div> 
+        
+      </div>
+
+      <div class="p-d-flex p-flex-row ">
+        <div class="p-d-flex p-flex-column  p-m-2">
+          <label for="infiscal">fiscal code</label>
+          <input id="infiscal" type="text" pInputText [(ngModel)]="newAccount.profileDto.fiscalCode">      
+        </div>
+        <div class="p-d-flex p-flex-column  p-m-2">
+          <label for="inAddress">address</label>
+          <input id="idAddress" type="text" pInputText [(ngModel)]="newAccount.profileDto.address"> 
+         
+        </div>
+      </div>
+      <div class="p-d-flex p-flex-row ">
+            
+        <div class="p-d-flex p-flex-column  p-m-2">
+          <label for="inPhone">Phone</label>
+          <input id="inPhone" type="text" pInputText [(ngModel)]="newAccount.profileDto.phone"> 
+          
+        </div>
+      </div>
+       
          <div class=" p-d-flex p-flex-row p-jc-center">
           <button pButton class="p-m-2" type="button" label="Register" icon="pi pi-check" iconPos="left" (click) = registerUser() ></button>
          </div>  

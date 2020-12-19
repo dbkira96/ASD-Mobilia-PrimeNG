@@ -11,7 +11,11 @@ export class ProductDataService {
 constructor(private HttpClient:HttpClient) { }
 
   getAllProducts(){
-    return this.HttpClient.get<Product[]>(`${environment.API_URL}/piece/products`);
+    /* return this.HttpClient.get<any>(`${environment.API_URL}/storehouse/products`)
+        .toPromise()
+        .then(res => <Product[]>res.data)
+        .then(data => { return data; }); */
+    return this.HttpClient.get<Product[]>(`${environment.API_URL}/storehouse/products`);
   }
 
   getProductById(id:string){
@@ -27,13 +31,5 @@ constructor(private HttpClient:HttpClient) { }
     return this.HttpClient.get<Product[]>("");
   }
   products: Product[] =[];
-  getProductByNameStud(){
-    
-    var product1 = new Product(1,"sedia","arredamento","cucina",20,"A-2");
-    var product2 = new Product(2,"tavolo","esterno","cucina",30,"IKEA");
-    var product3 = new Product(3,"vaso","arredamento","salotto",40,"IKEA");
-    this.products = [product1,product2,product3];
-
-    return this.products;
-  }
+ 
 }

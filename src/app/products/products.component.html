@@ -1,25 +1,110 @@
 <app-toolbar></app-toolbar>
-
-<p-dataView [value]="products">
+<!--Old-basic version -->
+<!-- <p-dataView [value]="products">
   
   
-  <ng-template let-product pTemplate="listItem">
-      <div class="p-col-12">
-          <div class="product-list-item">
-              <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name"/>
-              <div class="product-list-detail">
-                  <div class="product-name">{{product.name}}</div>
-                  <div class="product-description">{{product.description}}</div>
-                  
-                  <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
-              </div>
-              <div class="product-list-action">
-                  <span class="product-price">${{product.price}}</span>
-                  <p-button icon="pi pi-cog"  ></p-button>
-                  <span [class]="'product-badge status-' ">{{product.inventoryStatus}}</span>
-                          </div>
-                      </div>
-                  </div>
-              </ng-template>
+    <ng-template let-product let-i pTemplate="listItem">
+        <div class="p-col-12">
+            <div class="product-list-item">
+                <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name"/>
+                    <div class="product-list-detail">
+                    <div class="product-name">{{product.name}}</div>
+                    <div class="product-description">{{product.description}}</div>
+                    <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
+                </div>
+                <div class="product-list-action">
+                <span class="product-price">${{product.price}}</span>
+                <p-button icon="pi pi-cog"  ></p-button>
+                <span [class]="'product-badge status-' ">{{product.inventoryStatus}}</span>
+                </div>
+            </div>
+        </div>
+    </ng-template>
               
-</p-dataView>
+</p-dataView> -->
+<div class="card">
+
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+           
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          
+        </ng-template>
+    </p-toolbar>
+    <p-table #dt [value]="products" [rows]="20" [paginator]="true"
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Products</h5>
+               
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                
+                <th pColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th>Image</th>
+                <th pColumn="brand">Brand </th>
+                <th pColumn="Sub-Category">Sub-Category </th>
+                <th pColumn="Vendor">vendor</th>
+                <th pColumn="Color">Color </th>
+                <th pColumn="Stock">Stock </th>
+                <th pColumn="Price">Price </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                </td>
+                <td>{{product.name}}</td>
+                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td>
+                <td>{{product.brand}}</td>
+                <td>{{product.subcategoryName}}</td>
+                <td>{{product.price | currency:'EUR'}}</td>
+                <td>{{product.category}}</td>
+                
+                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <img [src]="'assets/showcase/images/demo/product/'" [alt]="product.name" class="product-image" *ngIf="false">
+    </ng-template>
+    <div class="p-field">
+        <label for="name">Name</label>
+        <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
+        <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small>
+    </div>
+    <div class="p-field">
+        <label for="brand">brand</label>
+        <input type="text" pInputText id="brand" [(ngModel)]="product.brand"  />  
+    </div>
+    <div class="p-field">
+        <label for="sub">Subcategory</label>
+        <input type="text" pInputText id="sub" [(ngModel)]="product.subcategoryName"  />  
+    </div>
+    <div class="p-field">
+        <label for="price">price</label>
+        <p-inputNumber id="price" [(ngModel)]="product.price"  >  </p-inputNumber>
+    </div>
+    <div class="p-field">
+        <label for="stock">stock</label>
+        <p-inputNumber id="stock" [(ngModel)]="product.name" [disabled]=true>  </p-inputNumber>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    </ng-template>
+</p-dialog>

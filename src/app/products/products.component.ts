@@ -2,41 +2,93 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import{Product} from '../domain/Product'
 import{ProductDataService}from '../services/data/ProductData.service'
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.scss']
+  styleUrls: ['./products.component.scss'],
+  providers: [ ProductDataService ,MessageService, ConfirmationService]
 })
+
+
+
 export class ProductsComponent implements OnInit {
-  products: Product[]=[];
+  productDialog: boolean;
+  products: Product[];
+  product: Product={};
+  submitted:boolean;
+
   constructor(
     private productData:ProductDataService,
+    private messageService: MessageService, 
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit() {
    // this.products=this.productData.getAllProducts();
-      this.productData.getAllProducts().subscribe(
-        response=>{
-          this.products=response
+   this.productData.getAllProducts().subscribe(data => this.products = data);
+   
+  }
+  openNew() {
+    this.product = {};
+    this.submitted = false;
+    this.productDialog = true;
+  }
+  editProduct(product: Product) {
+    this.product = {...product};
+    this.productDialog = true;
+  }
+  deleteProduct(product: Product) {
+    this.confirmationService.confirm({
+        message: 'Are you sure you want to delete ' + product.name + '?',
+        header: 'Confirm',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+            /* this.products = this.products.filter(val => val.id !== product.id);
+            this.product = {};
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000}); */
+            this.product = {};
         }
-      )
-   /*  this.authService.authenticate(this.username, this.password).subscribe(
-      response => {
-        
-        if(response==true) {
-          sessionStorage.setItem("user", this.username);
-          this.isAuthenticate = true;
-          this.route.navigate(['home', this.username]);
+    });
+}
+saveProduct() {
+  this.submitted = true;
+
+  /* if (this.product.name.trim()) {
+      if (this.product.id) {
+          this.products[this.findIndexById(this.product.id)] = this.product;                
+          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
       }
       else {
-          this.isAuthenticate = false;
-          this.messageService.add({key: 'tc', severity:'error', summary: 'Error', detail: 'Bad username or password'});
-        }
+          this.product.id = this.createId();
+          this.product.image = 'product-placeholder.svg';
+          this.products.push(this.product);
+          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
       }
-    ) */
+
+      this.products = [...this.products];
+      this.productDialog = false;
+      this.product = {};
+  } */
+}
+findIndexById(id: string): number {
+  let index = -1;
+  for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].name === id) {
+          index = i;
+          break;
+      }
   }
 
+  return index;
+}
+
+hideDialog() {
+    this.productDialog = false;
+    this.submitted = false;
+}
 }

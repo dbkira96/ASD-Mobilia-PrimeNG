@@ -6,6 +6,8 @@ import { Profile } from '../domain/Profile';
 import { User } from '../domain/User';
 import { AuthService } from '../services/auth.service';
 
+
+
 interface Gender {
   name: string,
   code: string
@@ -41,7 +43,8 @@ export class RegisterComponent implements OnInit {
 
    }
     
-    newAccount= new Account(new User("admin","admin@mobilia.com","admin"),new Profile("DIO","Brando","MALE","KONODIODA","M",new Date(),0,"../../assets/images/dio.jpg"),"EMPLOYEE");   
+    newAccount= new Account(new User("admin","admin@mobilia.com","admin"),new Profile("DIO","Brando","MALE","KONODIODA","M",new Date(),0,"../../assets/images/dio.jpg"),"EMPLOYEE"); 
+    //newAccount= new Account(new User("","",""),new Profile("","","","","",new Date(),0,""),"EMPLOYEE"); 
     isAuthenticate: Boolean = false;
 
     
@@ -49,7 +52,7 @@ export class RegisterComponent implements OnInit {
     ngOnInit() {
     }
     registerUser() {
-      
+        this.newAccount.type="EMPLOYEE"
         this.authService.register(this.newAccount).subscribe(
           response=>{
             console.debug(response);

@@ -15,6 +15,9 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import {ToolbarModule} from 'primeng/toolbar';
 import {DataViewModule} from 'primeng/dataview';
 import {DropdownModule} from 'primeng/dropdown';
+import {CalendarModule} from 'primeng/calendar';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {DialogModule} from 'primeng/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +28,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
+import {InputNumberModule} from 'primeng/inputnumber';
+
 
 @NgModule({
   declarations: [						
@@ -52,7 +57,11 @@ import { RegisterComponent } from './register/register.component';
     FieldsetModule,
     ToolbarModule,
     DataViewModule,
-    DropdownModule
+    DropdownModule,
+    CalendarModule,
+    KeyFilterModule,
+    DialogModule,
+    InputNumberModule
   ],
   providers: [],
   bootstrap: [AppComponent]
