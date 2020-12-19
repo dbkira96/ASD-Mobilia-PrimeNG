@@ -14,6 +14,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {ToolbarModule} from 'primeng/toolbar';
 import {DataViewModule} from 'primeng/dataview';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,15 +24,17 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
       LoginComponent,
       HomeComponent,
       ProductsComponent,
       ProductComponent,
-      ToolbarComponent
+      ToolbarComponent,
+      RegisterComponent
    ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     FieldsetModule,
     ToolbarModule,
     DataViewModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

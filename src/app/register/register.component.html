@@ -1,0 +1,83 @@
+<div class="p-grid p-col " >
+  <div  class="p-col"></div>
+  <p-card class="p-m-10" >
+      
+    <div class="p-formgroup-column p-col p-jc-center ">
+      <p-header class="p-d-flex p-jc-center"> 
+          <img src="../../assets/images/logo.png">
+      </p-header>
+      <div class="p-d-flex p-flex-row">
+          <div class="p-float-label p-m-4">
+            <input id="inUsername" type="text" pInputText [(ngModel)]="newAccount.userDto.username"> 
+            <label for="inUsername">Username</label>
+          </div>
+          <div class="p-float-label  p-m-4">
+            <input id="inPassword" type="password" pInputText [(ngModel)]="newAccount.userDto.password"> 
+            <label for="inPassword">Password</label>
+          </div>
+      </div>
+      <div class="p-d-flex p-flex-row  ">
+        <div class="p-float-label  p-m-4">
+          <input id="inEmail" type="text" pInputText [(ngModel)]="newAccount.userDto.email"> 
+          <label for="inEmail">Email</label>
+        </div>
+        
+      </div>
+      <div class="p-d-flex p-flex-row  ">
+        <div class="p-float-label p-m-4">
+          <input id="inName" type="text" pInputText [(ngModel)]="newAccount.profileDto.name"> 
+          <label for="inName">Name</label>
+        </div>
+        <div class="p-float-label p-m-4">
+          <input id="inSurname" type="text" pInputText [(ngModel)]="newAccount.profileDto.surname"> 
+          <label for="inSurname">Surname</label>
+        </div>
+        <div class="p-float-label p-m-4">
+          <p-dropdown [options]="genders" [(ngModel)]="newAccount.profileDto.gender" optionLabel="name" optionValue="code"></p-dropdown>
+          <label for="inGender">Gender</label>
+        </div>
+      </div>
+      <div class="p-d-flex p-flex-row ">
+        <div class="p-float-label p-m-4">
+          <input id="infiscal" type="text" pInputText [(ngModel)]="newAccount.profileDto.fiscalCode"> 
+          <label for="infiscal">fiscal code</label>
+        </div>
+        <div class="p-float-label p-m-4">
+          <input id="idAddress" type="text" pInputText [(ngModel)]="newAccount.profileDto.address"> 
+          <label for="inAddress">address</label>
+        </div>
+      </div>
+      <div class="p-d-flex p-flex-row ">
+        <div class="p-float-label p-m-4">
+          <input id="idDate" type="text" pInputText [(ngModel)]="newAccount.profileDto.birthdate"> 
+          <label for="inAddress">birth date</label>
+        </div>     
+        <div class="p-float-label p-m-4">
+          <input id="inPhone" type="text" pInputText [(ngModel)]="newAccount.profileDto.phone"> 
+          <label for="inPhone">phone</label>
+        </div>
+      </div>
+      <div class="p-d-flex p-flex-row  ">    
+        <div class="p-float-label p-m-4">
+          <input id="inType" type="text" pInputText [(ngModel)]="newAccount.type"> 
+          <label for="inType">type</label>
+        </div>
+
+        <div class="p-float-label p-m-4">
+          <input id="inPhoto" type="text" pInputText [(ngModel)]="newAccount.profileDto.photo"> 
+          <label for="inPhoto">photo</label>
+        </div>
+      </div> 
+         <div class=" p-d-flex p-flex-row p-jc-center">
+          <button pButton class="p-m-2" type="button" label="Register" icon="pi pi-check" iconPos="left" (click) = registerUser() ></button>
+         </div>  
+      
+        <p-footer>
+            <img src="../../assets/images/logo2.png"style="height:30px" >
+        </p-footer>
+    </div>
+  </p-card>
+<div  class="p-col"></div>
+</div>
+
+<p-toast position="top-center" key="tc"></p-toast>
