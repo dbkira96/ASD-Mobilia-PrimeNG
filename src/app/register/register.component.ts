@@ -5,6 +5,8 @@ import { Account } from '../domain/Account';
 import { Profile } from '../domain/Profile';
 import { User } from '../domain/User';
 import { AuthService } from '../services/auth.service';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 
 
@@ -51,11 +53,17 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
     }
+    onClose(){
+      this.route.navigate(['home']);
+    }
     registerUser() {
         this.newAccount.type="EMPLOYEE"
         this.authService.register(this.newAccount).subscribe(
           response=>{
-            console.debug(response);
+            console.log(response);
+            this.messageService.add({key: 'tc', severity:'success', summary: 'Service Message', detail: 'User successfully registered'});
+           
+
           }
         )
     }
