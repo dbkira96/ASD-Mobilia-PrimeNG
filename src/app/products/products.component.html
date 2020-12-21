@@ -46,7 +46,7 @@
         <ng-template pTemplate="header">
             <tr>
                 
-                <th pColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pColumn="name">Name </th>
                 <th>Image</th>
                 <th pColumn="brand">Brand </th>
                 <th pColumn="Sub-Category">Sub-Category </th>
@@ -59,17 +59,15 @@
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                <td>
-                    <p-tableCheckbox [value]="product"></p-tableCheckbox>
-                </td>
+                
                 <td>{{product.name}}</td>
                 <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td>
                 <td>{{product.brand}}</td>
                 <td>{{product.subcategoryName}}</td>
+                <td>{{product.vendorId}}</td>
+                <td>{{product.color}}</td>
+                <td>{{product.stock}}</td>
                 <td>{{product.price | currency:'EUR'}}</td>
-                <td>{{product.category}}</td>
-                
-                <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
