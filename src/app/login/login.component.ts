@@ -27,15 +27,16 @@ export class LoginComponent implements OnInit {
       this.authService.authenticate(this.username, this.password).subscribe(
         response => {
           
-          if(response!=null) {
-            sessionStorage.setItem("user", this.username);
+            sessionStorage.setItem("user", response.username);
             this.isAuthenticate = true;
             this.route.navigate(['home']);
-        }
-        else {
-            this.isAuthenticate = false;
-            this.messageService.add({key: 'tc', severity:'error', summary: 'Error', detail: 'Bad username or password'});
-          }
+       
+        },
+        err=>{
+          sessionStorage.removeItem("user");
+          this.isAuthenticate=false;
+          console.log("error:",err)
+          this.messageService.add({key: 'tc', severity:'error', summary: 'Error', detail: 'Bad username or password'});
         }
       )
     }
