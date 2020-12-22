@@ -23,6 +23,7 @@ export class ProductsComponent implements OnInit {
   products: Product[];
   product: Product={};
   submitted:boolean;
+  search="";
 
   constructor(
     private productData:ProductDataService,

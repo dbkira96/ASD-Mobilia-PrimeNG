@@ -43,7 +43,7 @@
                 <h5 class="p-m-0">Manage Products</h5>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="dt.filterGlobal('','contains')" placeholder="Search..." />
+                    <input pInputText type="text" [(ngModel)]="search" (input)="dt.filterGlobal(search,'contains')" placeholder="Search..." />
                 </span>
             </div>
         </ng-template>
