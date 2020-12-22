@@ -20,9 +20,9 @@ import {FilterService} from 'primeng/api';
 
 export class ProductsComponent implements OnInit {
   productDialog: boolean;
-  products: Product[];
+  products: Product[]=[];
   product: Product={};
-  subcategories: string[];
+  subcategories: string[]=[];
   submitted:boolean;
   search="";
 
@@ -35,13 +35,20 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
    // this.products=this.productData.getAllProducts();
    this.productData.getAllProducts().subscribe(
-    data => {​​
-
-      
-
-     this.products = data;
-
-   }​​
+      data => {​​
+      this.products = data;
+      console.log(this.products)
+      this.products.forEach (
+        p=>{
+          
+          //console.log(p);
+          if(p!==undefined)
+            this.subcategories.push(p.subcategoryName);
+        });
+        this.subcategories.sort();
+        this.subcategories.filter(this.onlyUnique);
+        console.log(this.subcategories);
+    }​​
 
    );
    //var i:number;
@@ -50,15 +57,6 @@ export class ProductsComponent implements OnInit {
     //  this.subcategories.push(this.products[i].subcategoryName)
      // console.log(this.products[i].subcategoryName)
    //}
-   //this.subcategories.sort();
-   //this.subcategories.filter(this.onlyUnique);
-
-   console.log(this.products)
-
-  
-   
-   
-   
    
   }
   openNew() {
