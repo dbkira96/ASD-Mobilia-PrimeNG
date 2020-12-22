@@ -4,6 +4,8 @@ import{Product} from '../domain/Product'
 import{ProductDataService}from '../services/data/ProductData.service'
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {FilterService} from 'primeng/api';
 
 
 
@@ -31,6 +33,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
    // this.products=this.productData.getAllProducts();
    this.productData.getAllProducts().subscribe(data => this.products = data);
+   
+   
    
   }
   openNew() {
@@ -91,4 +95,6 @@ hideDialog() {
     this.productDialog = false;
     this.submitted = false;
 }
+
+
 }
