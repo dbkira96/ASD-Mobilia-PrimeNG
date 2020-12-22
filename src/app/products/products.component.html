@@ -43,15 +43,11 @@
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
                 <h5 class="p-m-0">Manage Products</h5>
-                <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="subcategories" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true">
-                            <ng-template let-option pTemplate="item">
-                                <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
-                            </ng-template>
-                        </p-dropdown>
-                    </ng-template>
-                </p-columnFilter>
+                 <p-columnFilter field="subcategoryName" matchMode="equals" [showMenu]="false">
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-dropdown [ngModel]="value" [options]="subcategories" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true"> </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input pInputText type="text" [(ngModel)]="search" (input)="dt.filterGlobal(search,'contains')" placeholder="Search..." />
@@ -61,16 +57,17 @@
         <ng-template pTemplate="header">
             <tr>
                 
-                <th pColumn="name">Name </th>
+                <th >Name </th>
                 <th>Image</th>
-                <th pColumn="brand">Brand </th>
-                <th pColumn="Sub-Category">Sub-Category </th>
-                <th pColumn="Vendor">vendor</th>
-                <th pColumn="Color">Color </th>
-                <th pColumn="Stock">Stock </th>
-                <th pColumn="Price">Price </th>
+                <th >Brand </th>
+                <th >Sub-Category </th>
+                <th >vendor</th>
+                <th >Color </th>
+                <th >Stock </th>
+                <th >Price </th>
                 <th></th>
             </tr>
+            
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>

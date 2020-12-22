@@ -22,9 +22,11 @@ export class ProductsComponent implements OnInit {
   productDialog: boolean;
   products: Product[]=[];
   product: Product={};
-  subcategories: string[]=[];
+  subcategories: string[]=[]; // non subcategories: string[]
+  selectedSub:string;
   submitted:boolean;
   search="";
+  
 
   constructor(
     private productData:ProductDataService,
@@ -40,14 +42,10 @@ export class ProductsComponent implements OnInit {
       console.log(this.products)
       this.products.forEach (
         p=>{
-          
-          //console.log(p);
-          if(p!==undefined)
             this.subcategories.push(p.subcategoryName);
         });
         this.subcategories.sort();
         this.subcategories.filter(this.onlyUnique);
-        console.log(this.subcategories);
     }​​
 
    );
