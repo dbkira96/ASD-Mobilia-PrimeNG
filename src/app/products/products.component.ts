@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit {
   productDialog: boolean;
   products: Product[];
   product: Product={};
+  subcategories: string[];
   submitted:boolean;
   search="";
 
@@ -33,7 +34,29 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
    // this.products=this.productData.getAllProducts();
-   this.productData.getAllProducts().subscribe(data => this.products = data);
+   this.productData.getAllProducts().subscribe(
+    data => {​​
+
+      
+
+     this.products = data;
+
+   }​​
+
+   );
+   //var i:number;
+   //for(i = 0;i < this.products.length;i++)
+   //{
+    //  this.subcategories.push(this.products[i].subcategoryName)
+     // console.log(this.products[i].subcategoryName)
+   //}
+   //this.subcategories.sort();
+   //this.subcategories.filter(this.onlyUnique);
+
+   console.log(this.products)
+
+  
+   
    
    
    
@@ -97,5 +120,9 @@ hideDialog() {
     this.submitted = false;
 }
 
+
+onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
 
 }
