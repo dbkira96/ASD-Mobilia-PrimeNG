@@ -57,14 +57,15 @@
         <ng-template pTemplate="header">
             <tr>
                 
-                <th >Name </th>
+                <th>Name </th>
                 <th>Image</th>
-                <th >Brand </th>
-                <th >Sub-Category </th>
-                <th >vendor</th>
-                <th >Color </th>
-                <th >Stock </th>
-                <th >Price </th>
+                <th>Brand </th>
+                <th>Sub-Category </th>
+                <th>Vendor</th>
+                <th>Color </th>
+                <th>Place</th>
+                <th>Stock </th>
+                <th>Price </th>
                 <th></th>
             </tr>
             
@@ -75,9 +76,10 @@
                 <td>{{product.name}}</td>
                 <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td>
                 <td>{{product.brand}}</td>
-                <td>{{product.subcategoryName}}</td>
-                <td>{{product.vendorId}}</td>
+                <td>{{product.subcategory.name}}</td>
+                <td>{{product.vendor.name}}</td>
                 <td>{{product.color}}</td>
+                <td>{{product.place.id}}</td>
                 <td>{{product.stock}}</td>
                 <td>{{product.price | currency:'EUR'}}</td>
                 <td>
@@ -103,7 +105,7 @@
     </div>
     <div class="p-field">
         <label for="sub">Subcategory</label>
-        <input type="text" pInputText id="sub" [(ngModel)]="product.subcategoryName"  />  
+        <input type="text" pInputText id="sub" [(ngModel)]="product.subcategory"  />  
     </div>
     <div class="p-field">
         <label for="price">price</label>
@@ -111,7 +113,7 @@
     </div>
     <div class="p-field">
         <label for="stock">stock</label>
-        <p-inputNumber id="stock" [(ngModel)]="product.name" [disabled]=true>  </p-inputNumber>
+        <p-inputNumber id="stock" [(ngModel)]="product.stock" [disabled]=true>  </p-inputNumber>
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>

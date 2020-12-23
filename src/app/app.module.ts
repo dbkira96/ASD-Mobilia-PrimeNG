@@ -29,17 +29,19 @@ import { ProductComponent } from './product/product.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RegisterComponent } from './register/register.component';
 import {InputNumberModule} from 'primeng/inputnumber';
+import { OrdersComponent } from './orders/orders.component';
 
 
 @NgModule({
-  declarations: [						
+  declarations: [							
     AppComponent,
       LoginComponent,
       HomeComponent,
       ProductsComponent,
       ProductComponent,
       ToolbarComponent,
-      RegisterComponent
+      RegisterComponent,
+      OrdersComponent
    ],
   imports: [
     BrowserModule,

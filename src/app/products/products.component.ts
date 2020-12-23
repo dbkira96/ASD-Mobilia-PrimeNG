@@ -42,7 +42,7 @@ export class ProductsComponent implements OnInit {
       console.log(this.products)
       this.products.forEach (
         p=>{
-            this.subcategories.push(p.subcategoryName);
+            this.subcategories.push(p.subcategory.name);
         });
         this.subcategories.sort();
         this.subcategories.filter(this.onlyUnique);
