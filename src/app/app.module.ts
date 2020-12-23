@@ -31,6 +31,8 @@ import { RegisterComponent } from './register/register.component';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { OrdersComponent } from './orders/orders.component';
 import { NewOrderComponent } from './newOrder/newOrder.component';
+import {CarouselModule} from 'primeng/carousel';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
@@ -43,8 +45,10 @@ import { NewOrderComponent } from './newOrder/newOrder.component';
       ToolbarComponent,
       RegisterComponent,
       OrdersComponent,
-      NewOrderComponent
+      NewOrderComponent,
 
+      CategoryComponent,
+      OrdersComponent
    ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ import { NewOrderComponent } from './newOrder/newOrder.component';
     TabMenuModule,
     BrowserAnimationsModule,
     TableModule,
+    CarouselModule,
     FieldsetModule,
     ToolbarModule,
     DataViewModule,

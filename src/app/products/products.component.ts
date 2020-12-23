@@ -21,7 +21,7 @@ import {FilterService} from 'primeng/api';
 export class ProductsComponent implements OnInit {
   productDialog: boolean;
   products: Product[]=[];
-  product: Product={};
+  product: Product={subcategory:{}};
   subcategories: string[]=[]; // non subcategories: string[]
   selectedSub:string;
   submitted:boolean;
