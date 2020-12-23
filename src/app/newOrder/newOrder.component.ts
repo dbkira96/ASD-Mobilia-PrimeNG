@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import{Product} from '../domain/Product'
+import{Element} from '../domain/Element'
 import{ProductDataService}from '../services/data/ProductData.service'
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
@@ -11,9 +12,14 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./newOrder.component.css']
 })
 export class NewOrderComponent implements OnInit {
+  
   productDialog: boolean;
   products: Product[]=[];
   product: Product={};
+
+  elements:Element[]=[];
+  element:Element={}
+
   subcategories: string[]=[]; // non subcategories: string[]
   selectedSub:string;
   submitted:boolean;
@@ -32,5 +38,12 @@ export class NewOrderComponent implements OnInit {
 
    );
   }
-
+  addToOrder(productToAdd:Product){
+    var e:Element={product:productToAdd,quantity:1}
+    this.elements.push(e);
+  }
+  removeElement(elementToRemove:Element){
+    
+    this.elements=this.elements.filter(obj=>obj!=elementToRemove)
+  }
 }

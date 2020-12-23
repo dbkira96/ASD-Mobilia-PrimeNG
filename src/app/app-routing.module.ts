@@ -6,6 +6,7 @@ import{RegisterComponent}from './register/register.component'
 import { Routes, RouterModule } from '@angular/router';
 import { RouteGuardServiceService } from './services/RouteGuard.service';
 import { OrdersComponent } from './orders/orders.component';
+import{NewOrderComponent}from './newOrder/newOrder.component'
 
 const routes: Routes = [
   {path:'', component : LoginComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'products', component : ProductsComponent,canActivate:[RouteGuardServiceService]},
   {path:'register', component : RegisterComponent,canActivate:[RouteGuardServiceService]},
   {path:'orders', component : OrdersComponent, canActivate:[RouteGuardServiceService]},
+  {path:'newOrder', component : NewOrderComponent, canActivate:[RouteGuardServiceService]},
 ];
 
 @NgModule({
