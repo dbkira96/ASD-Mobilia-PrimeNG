@@ -43,7 +43,7 @@ import { CategoryComponent } from './category/category.component';
       ProductComponent,
       ToolbarComponent,
       RegisterComponent,
-      CategoryComponent
+      CategoryComponent,
       OrdersComponent
    ],
   imports: [
