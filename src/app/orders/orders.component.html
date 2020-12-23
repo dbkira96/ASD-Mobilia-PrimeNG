@@ -1,7 +1,6 @@
 <app-toolbar></app-toolbar>
 
-<p-table #dt [value]="orders" [rows]="20" [paginator]="true" [rowHover]="true" dataKey="id"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+<p-table [value]="orders" [rows]="20" dataKey="id">
     <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
             <h5 class="p-m-0">Orders</h5>
@@ -9,39 +8,60 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th pColumn="id">Id </th>
-            <th pColumn="user">User </th>
-            <th pColumn="state">State </th>
-            <th pColumn="products">Products</th>
-            <th pColumn="quantities">Quantities</th>
+            <th></th>
+            <th>Id </th>
+            <th>User </th>
+            <th>State </th>
             <th></th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-order>
+    <ng-template pTemplate="body" let-order let-expanded="expanded">
         <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="order" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
             <td>{{order.id}}</td>
             <td>{{order.user.username}}</td>
             <td>{{order.state}}</td>
             <td>
-                <p-table #dt [value]="order.elements">
-                    <ng-template pTemplate="body" let-element>
-                        <tr>
-                            <td>{{element.product.name}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </td>
-            <td>
-                <p-table #dt [value]="order.elements">
-                    <ng-template pTemplate="body" let-element>
-                        <tr>
-                            <td>{{element.quantity}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </td>
-            <td>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOrder(order)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-order>
+        <tr>
+            <td colspan="5">
+                <div>
+                    <p-table [value]="order.elements" dataKey="product.id">
+                        <ng-template pTemplate="caption">
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                <h5 class="p-m-0">Products</h5>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Quantity</th>
+                                <th>Name </th>
+                                <th>Brand </th>
+                                <th>Sub-Category </th>
+                                <th>Vendor</th>
+                                <th>Color </th>
+                                <th>Price </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-element>
+                            <tr>
+                                <td>{{element.quantity}}</td>
+                                <td>{{element.product.name}}</td>
+                                <td>{{element.product.brand}}</td>
+                                <td>{{element.product.subcategory.name}}</td>
+                                <td>{{element.product.vendor.name}}</td>
+                                <td>{{element.product.color}}</td>
+                                <td>{{element.product.price | currency:'EUR'}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </td>
         </tr>
     </ng-template>
