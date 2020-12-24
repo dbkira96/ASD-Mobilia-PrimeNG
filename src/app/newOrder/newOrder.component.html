@@ -24,9 +24,7 @@
             
             <th >Name </th>
             <th >Brand </th>
-            <th >Sub-Category </th>
-            <th >vendor</th>
-            <th >Color </th>
+            <th >Vendor </th>
             <th >Stock </th>
             <th >Price </th>
             <th></th>
@@ -39,8 +37,7 @@
             <td>{{product.name}}</td>
            
             <td>{{product.brand}}</td>
-            <td>{{product.subcategoryName}}</td>
-            <td>{{product.vendorId}}</td>
+            <td>{{product.vendor.name}}</td>
             <td>{{product.stock}}</td>
             <td>{{product.price | currency:'EUR'}}</td>
             <td>

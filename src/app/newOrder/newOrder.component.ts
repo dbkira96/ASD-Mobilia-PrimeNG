@@ -9,7 +9,8 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-newOrder',
   templateUrl: './newOrder.component.html',
-  styleUrls: ['./newOrder.component.css']
+  styleUrls: ['./newOrder.component.css'],
+  providers: [ ProductDataService ,MessageService, ConfirmationService]
 })
 export class NewOrderComponent implements OnInit {
   
