@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { Account } from '../domain/Account';
-import { Profile } from '../domain/Profile';
-import { User } from '../domain/User';
-import { AuthService } from '../services/auth.service';
+import { Account } from '../../domain/Account';
+import { Profile } from '../../domain/Profile';
+import { User } from '../../domain/User';
+import { AuthService } from '../../services/auth.service';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 

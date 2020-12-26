@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Order } from '../domain/Order';
-import { OrderDataService } from '../services/data/OrderData.service';
+import { Order } from '../../domain/Order';
+import { OrderDataService } from '../../services/data/OrderData.service';
 
 @Component({
   selector: 'app-orders',

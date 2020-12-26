@@ -22,17 +22,17 @@ import {DialogModule} from 'primeng/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductComponent } from './product/product.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './component/login/login.component';
+import { HomeComponent } from './component/home/home.component';
+import { ProductsComponent } from './component/products/products.component';
+import { ProductComponent } from './component/product/product.component';
+import { ToolbarComponent } from './component/toolbar/toolbar.component';
+import { RegisterComponent } from './component/register/register.component';
 import {InputNumberModule} from 'primeng/inputnumber';
-import { OrdersComponent } from './orders/orders.component';
-import { NewOrderComponent } from './newOrder/newOrder.component';
+import { OrdersComponent } from './component/orders/orders.component';
+import { NewOrderComponent } from './component/newOrder/newOrder.component';
 import {CarouselModule} from 'primeng/carousel';
-import { CategoryComponent } from './category/category.component';
+import { CategoryComponent } from './component/category/category.component';
 
 
 @NgModule({

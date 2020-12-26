@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
-import{Product} from '../domain/Product'
-import{Element} from '../domain/Element'
-import{ProductDataService}from '../services/data/ProductData.service'
+import{Product} from '../../domain/Product'
+import{Element} from '../../domain/Element'
+import{ProductDataService}from '../../services/data/ProductData.service'
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
