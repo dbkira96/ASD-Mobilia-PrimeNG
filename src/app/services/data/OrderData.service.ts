@@ -13,7 +13,7 @@ constructor(
 ) { }
 
 getOrders() {
-  return this.httpClient.get<Order[]>(`${environment.API_URL}/storehouse/commands/1`);
+  return this.httpClient.get<Order[]>(`${environment.API_URL}/storehouse/commands`);
 }
 
 deleteOrder(order: Order) {

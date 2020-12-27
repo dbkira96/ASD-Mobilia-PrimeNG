@@ -24,8 +24,6 @@ interface Gender {
 
 
 
-
-
 export class RegisterComponent implements OnInit {
 
   genders: Gender[];

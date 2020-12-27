@@ -13,4 +13,5 @@ export class Product {
     vendor?: Vendor;
     place?: Place;
     stock?: number;
+
 }
