@@ -1,18 +1,14 @@
 <app-toolbar></app-toolbar>
 
-<div class="p-d-flex p-flex-row">
-  <p-card class="p-d-flex p-flex-column">
+<div class="p-d-flex p-flex-row ">
+  <p-card class="p-d-flex p-flex-column p-m-2">
     <p-table #dt [value]="products" [rows]="20" [paginator]="true"
     [rowHover]="true" dataKey="id" [globalFilterFields]="['name']" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-            <h5 class="p-m-0">Manage Products</h5>
-            <p-columnFilter field="subcategoryName" matchMode="equals" [showMenu]="false">
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-dropdown [ngModel]="value" [options]="subcategories" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true"> </p-dropdown>
-                    </ng-template>
-            </p-columnFilter>
+            <h5 class="p-m-0">Quick Search</h5>
+            <button pButton pRipple icon="pi pi-plus"  (click)="toggleAddDialog()"></button>
             <span class="p-input-icon-left">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" [(ngModel)]="search" (input)="dt.filterGlobal(search,'contains')" placeholder="Search..." />
@@ -46,8 +42,8 @@
         </tr>
     </ng-template>
 </p-table>
-  </p-card> >
-  <p-card  class="p-d-flex p-flex-column">
+  </p-card> 
+  <p-card  class="p-d-flex p-flex-column p-m-2">
     <p-table #dt [value]="elements" [rows]="20" [paginator]="false"
     [rowHover]="true" dataKey="id" [globalFilterFields]="['name']" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
@@ -70,15 +66,18 @@
             <tr>
                 <td>{{element.product.id}}</td>
                 <td>{{element.product.name  }}</td>
-                <td>{{element.quantity | currency:'EUR'}}</td>
-                <td>{{element.product.price  }}</td>
+                <td>{{element.quantity }}</td>
+                <td>{{element.product.price*element.quantity | currency:'EUR' }}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-danger" (click)="removeElement(element)"></button>
                 </td>
             </tr>
         </ng-template>
-        <p>Total:"total"</p>
-        <button pButton pRipple > Confirm Order</button>
     </p-table>
+        <div>
+            <p>Total:"total"</p>
+            <button pButton label="Confirm Order" > </button>
+        </div>
   </p-card>
+        
 </div>

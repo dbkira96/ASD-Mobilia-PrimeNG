@@ -23,4 +23,8 @@ export class CategoryService {
     return this.http.get<string[]>(`${environment.API_URL}/storehouse/subcategoriesName`);
   }
   
+  //return all sub category by id of category
+  getAllSubcategoryByCategory(id):Observable<Subcategory[]>{
+    return this.http.get<Category[]>(`${environment.API_URL}/storehouse/categories/${id}`);
+  }
 }
