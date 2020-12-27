@@ -8,6 +8,8 @@ import { OrdersComponent } from './component/orders/orders.component';
 import{NewOrderComponent}from './component/newOrder/newOrder.component'
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
+import { CategoryComponent } from './component/category/category.component';
+import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 
 const routes: Routes = [
   {path:'', component : LoginComponent},
@@ -17,6 +19,7 @@ const routes: Routes = [
   {path:'register', component : RegisterComponent,canActivate:[RouteGuardServiceService]},
   {path:'orders', component : OrdersComponent, canActivate:[RouteGuardServiceService]},
   {path:'newOrder', component : NewOrderComponent, canActivate:[RouteGuardServiceService]},
+  {path:'categories/:id', component: SubcategoryComponent, canActivate:[RouteGuardServiceService]}
 ];
 
 @NgModule({

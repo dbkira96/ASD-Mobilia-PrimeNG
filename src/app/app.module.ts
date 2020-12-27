@@ -35,6 +35,7 @@ import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
+import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { RegisterComponent } from './component/register/register.component';
       NewOrderComponent,
 
       CategoryComponent,
-      OrdersComponent
+      OrdersComponent,
+      SubcategoryComponent
    ],
   imports: [
     ReactiveFormsModule,
