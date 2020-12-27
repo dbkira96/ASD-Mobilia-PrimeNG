@@ -33,6 +33,7 @@ import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/newOrder/newOrder.component';
 import {CarouselModule} from 'primeng/carousel';
 import { CategoryComponent } from './component/category/category.component';
+import { StorehouseComponent } from './component/storehouse/storehouse.component';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { CategoryComponent } from './component/category/category.component';
       RegisterComponent,
       OrdersComponent,
       NewOrderComponent,
-
+    StorehouseComponent,
       CategoryComponent,
       OrdersComponent
    ],
