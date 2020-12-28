@@ -1,124 +1,148 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import{Product} from '../../domain/Product'
-import{ProductDataService}from '../../services/data/ProductData.service'
+import { Product } from '../../domain/Product'
+import { ProductDataService } from '../../services/data/ProductData.service'
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import {AutoCompleteModule} from 'primeng/autocomplete';
-import {FilterService} from 'primeng/api';
-
+import { CategoryService } from 'src/app/services/category.service';
+import { VendorService } from 'src/app/services/vendor.service';
 
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  providers: [ ProductDataService ,MessageService, ConfirmationService]
+  providers: [ProductDataService, MessageService, ConfirmationService]
 })
-
-
-
 export class ProductsComponent implements OnInit {
   productDialog: boolean;
-  products: Product[]=[];
-  product: Product={subcategory:{}};
-  subcategories: string[]=[]; // non subcategories: string[]
-  selectedSub:string;
-  submitted:boolean;
-  search="";
-  
+  products: Product[] = [];
+  product: Product = { subcategory: {} };
+  selectedSub: string;
+  submitted: boolean;
+  search = "";
+
+  subcategories: string[] = [];
+  vendors: string[] = [];
+
+  select_subcategory: string = "";
+  select_vendor: string = "";
+
+  update: boolean;
 
   constructor(
-    private productData:ProductDataService,
-    private messageService: MessageService, 
-    private confirmationService: ConfirmationService
+    private productData: ProductDataService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private categoryService: CategoryService,
+    private vendorService: VendorService
   ) { }
 
   ngOnInit() {
-   // this.products=this.productData.getAllProducts();
-   this.productData.getAllProducts().subscribe(
-      data => {​​
-      this.products = data;
-      console.log(this.products)
-      this.products.forEach (
-        p=>{
-            this.subcategories.push(p.subcategory.name);
-        });
-        this.subcategories.sort();
-        this.subcategories.filter(this.onlyUnique);
-    }​​
+    this.product = {
+      id: 0, name: "", brand: "", price: 0, color: "", size: "", stock: 0,
+      subcategory: { id: 0, name: "", category: { id: 0, name: "" } },
+      vendor: { id: 0, name: "", VATNumber: "", email: "", phone: 0 },
+      place: { id: 0, shelf: { id: 0 } }
+    };
 
-   );
-   //var i:number;
-   //for(i = 0;i < this.products.length;i++)
-   //{
-    //  this.subcategories.push(this.products[i].subcategoryName)
-     // console.log(this.products[i].subcategoryName)
-   //}
-   
+    this.productData.getAllProducts().subscribe(
+      data => {
+        this.products = data;
+      }
+    );
+
+    this.categoryService.getSubcategoriesName().subscribe(
+      data => {
+        this.subcategories = data;
+      }
+    );
+
+    this.vendorService.getVendorsName().subscribe(
+      data => {
+        this.vendors = data;
+      }
+    )
+
   }
+
   openNew() {
-    this.product = {};
-    this.submitted = false;
+    this.product = {
+      id: 0, name: "", brand: "", price: 0, color: "", size: "", stock: 0,
+      subcategory: { id: 0, name: "", category: { id: 0, name: "" } },
+      vendor: { id: 0, name: "", VATNumber: "", email: "", phone: 0 },
+      place: { id: 0, shelf: { id: 0 } }
+    };
     this.productDialog = true;
+    this.update = false;
   }
+
   editProduct(product: Product) {
-    this.product = {...product};
+    this.product = { ...product };
     this.productDialog = true;
+    this.update = true;
   }
-  deleteProduct(product: Product) {
-    this.confirmationService.confirm({
-        message: 'Are you sure you want to delete ' + product.name + '?',
-        header: 'Confirm',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-            /* this.products = this.products.filter(val => val.id !== product.id);
-            this.product = {};
-            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000}); */
-            this.product = {};
+
+  saveProduct() {
+    this.product.subcategory.name = this.select_subcategory;
+    this.product.vendor.name = this.select_vendor;
+    if (this.update) {
+      this.productData.update(this.product).subscribe(
+        response => {
+          this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'product updated' });
+        },
+        err => {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error updating the product' });
         }
-    });
-}
-saveProduct() {
-  this.submitted = true;
-
-  /* if (this.product.name.trim()) {
-      if (this.product.id) {
-          this.products[this.findIndexById(this.product.id)] = this.product;                
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
-      }
-      else {
-          this.product.id = this.createId();
-          this.product.image = 'product-placeholder.svg';
-          this.products.push(this.product);
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
-      }
-
-      this.products = [...this.products];
-      this.productDialog = false;
-      this.product = {};
-  } */
-}
-findIndexById(id: string): number {
-  let index = -1;
-  for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].name === id) {
-          index = i;
-          break;
-      }
+      );
+    }
+    else {
+      this.productData.save(this.product).subscribe(
+        response => {
+          this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'product saved' });
+        },
+        err => {
+          this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error saving the product' });
+        }
+      );
+    }
+    this.productDialog = false;
   }
 
-  return index;
-}
+  deleteProduct(product: Product) {
+    this.productData.delete(product.id).subscribe(
+      response => {
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'product deleted' });
+      },
+      err => {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error deleting the product' });
+      }
+    )
+  }
 
-hideDialog() {
+  hideDialog() {
     this.productDialog = false;
-    this.submitted = false;
-}
+  }
 
+  refresh(): void {
+    window.location.reload();
+  }
 
-onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
+  //  ???
+  findIndexById(id: string): number {
+    let index = -1;
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].name === id) {
+        index = i;
+        break;
+      }
+    }
+
+    return index;
+  }
+
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
 
 }

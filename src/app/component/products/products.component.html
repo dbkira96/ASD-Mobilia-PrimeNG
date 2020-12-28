@@ -1,122 +1,115 @@
 <app-toolbar></app-toolbar>
-<!--Old-basic version -->
-<!-- <p-dataView [value]="products">
-  
-  
-    <ng-template let-product let-i pTemplate="listItem">
-        <div class="p-col-12">
-            <div class="product-list-item">
-                <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name"/>
-                    <div class="product-list-detail">
-                    <div class="product-name">{{product.name}}</div>
-                    <div class="product-description">{{product.description}}</div>
-                    <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{product.category}}</span>
-                </div>
-                <div class="product-list-action">
-                <span class="product-price">${{product.price}}</span>
-                <p-button icon="pi pi-cog"  ></p-button>
-                <span [class]="'product-badge status-' ">{{product.inventoryStatus}}</span>
-                </div>
-            </div>
-        </div>
-    </ng-template>
-              
-</p-dataView> -->
+
 <div class="card">
 
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
-           
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+                (click)="openNew()"></button>
         </ng-template>
-
         <ng-template pTemplate="right">
-          
+
         </ng-template>
     </p-toolbar>
 
-  
-    
-        <p-table #dt [value]="products" [rows]="20" [paginator]="true"
-        [rowHover]="true" dataKey="id" [globalFilterFields]="['name']" 
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <p-table #dt [value]="products" [rows]="20" [paginator]="true" [rowHover]="true" dataKey="id"
+        [globalFilterFields]="['name']" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
                 <h5 class="p-m-0">Manage Products</h5>
                 <p-columnFilter field="subcategory.name" matchMode="equals" [showMenu]="false">
-                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                            <p-dropdown [ngModel]="value" [options]="subcategories" (onChange)="filter($event.value)" placeholder="Any" [showClear]="true"> </p-dropdown>
-                        </ng-template>
-                    </p-columnFilter>
+                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-dropdown [ngModel]="value" [options]="subcategories" (onChange)="filter($event.value)"
+                            placeholder="Any" [showClear]="true"> </p-dropdown>
+                    </ng-template>
+                </p-columnFilter>
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" [(ngModel)]="search" (input)="dt.filterGlobal(search,'contains')" placeholder="Search..." />
+                    <input pInputText type="text" [(ngModel)]="search" (input)="dt.filterGlobal(search,'contains')"
+                        placeholder="Search..." />
                 </span>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                
                 <th>Name </th>
                 <th>Image</th>
                 <th>Brand </th>
+                <th>Color </th>
                 <th>Sub-Category </th>
                 <th>Vendor</th>
-                <th>Color </th>
                 <th>Place</th>
                 <th>Stock </th>
                 <th>Price </th>
                 <th></th>
             </tr>
-            
         </ng-template>
         <ng-template pTemplate="body" let-product>
             <tr>
-                
+
                 <td>{{product.name}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="p-shadow-4" /></td>
+                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
+                        class="p-shadow-4" /></td>
                 <td>{{product.brand}}</td>
+                <td>{{product.color}}</td>
                 <td>{{product.subcategory.name}}</td>
                 <td>{{product.vendor.name}}</td>
-                <td>{{product.color}}</td>
                 <td>{{product.place.id}}</td>
                 <td>{{product.stock}}</td>
                 <td>{{product.price | currency:'EUR'}}</td>
                 <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editProduct(product)"></button>
-                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                        (click)="editProduct(product)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                        (click)="deleteProduct(product)"></button>
                 </td>
             </tr>
         </ng-template>
     </p-table>
 </div>
-<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+
+<p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true"
+    styleClass="p-fluid">
     <ng-template pTemplate="content">
         <img [src]="'assets/showcase/images/demo/product/'" [alt]="product.name" class="product-image" *ngIf="false">
     </ng-template>
     <div class="p-field">
         <label for="name">Name</label>
         <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-        <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small>
     </div>
     <div class="p-field">
-        <label for="brand">brand</label>
-        <input type="text" pInputText id="brand" [(ngModel)]="product.brand"  />  
+        <label for="brand">Brand</label>
+        <input type="text" pInputText id="brand" [(ngModel)]="product.brand" />
     </div>
     <div class="p-field">
-        <label for="sub">Subcategory</label>
-        <input type="text" pInputText id="sub" [(ngModel)]="product.subcategory.name"  />  
+        <label for="color">Color</label>
+        <input type="text" pInputText id="color" [(ngModel)]="product.color" />
+    </div>
+    <div class="p-field"> 
+        <label for="subcategory.name">Subcategory name</label>
+        <p-dropdown [options]="subcategories" [(ngModel)]="select_subcategory" placeholder="Select a subcategory" ></p-dropdown>
     </div>
     <div class="p-field">
-        <label for="price">price</label>
-        <p-inputNumber id="price" [(ngModel)]="product.price"  >  </p-inputNumber>
+        <label for="vendor.name">Vendor name</label>
+        <p-dropdown [options]="vendors" [(ngModel)]="select_vendor" placeholder="Select a vendor"></p-dropdown>
     </div>
     <div class="p-field">
-        <label for="stock">stock</label>
-        <p-inputNumber id="stock" [(ngModel)]="product.stock" [disabled]=true>  </p-inputNumber>
+        <label for="place.id">Place id</label>
+        <input type="text" pInputText id="place.id" [(ngModel)]="product.place.id" />
+    </div>
+    <div class="p-field">
+        <label for="stock">Stock</label>
+        <p-inputNumber id="stock" [(ngModel)]="product.stock"> </p-inputNumber>
+    </div>
+    <div class="p-field">
+        <label for="price">Price</label>
+        <p-inputNumber id="price" [(ngModel)]="product.price"> </p-inputNumber>
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
     </ng-template>
 </p-dialog>
+
+<p-toast position="top-center" key="tc" (onClose)="refresh()"></p-toast>

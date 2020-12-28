@@ -3,5 +3,5 @@ export class Vendor {
     name?: string;
     VATNumber?: string;
     email?: string;
-    phone?: string;
+    phone?: number;
 }
