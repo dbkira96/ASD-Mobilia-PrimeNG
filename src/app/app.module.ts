@@ -22,18 +22,20 @@ import {DialogModule} from 'primeng/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 import { ProductsComponent } from './component/products/products.component';
 import { ProductComponent } from './component/product/product.component';
 import { ToolbarComponent } from './component/toolbar/toolbar.component';
-import { RegisterComponent } from './component/register/register.component';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/newOrder/newOrder.component';
 import {CarouselModule} from 'primeng/carousel';
 import { CategoryComponent } from './component/category/category.component';
 import { StorehouseComponent } from './component/storehouse/storehouse.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { SubcategoryComponent } from './component/subcategory/subcategory.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -49,9 +51,11 @@ import { StorehouseComponent } from './component/storehouse/storehouse.component
       NewOrderComponent,
     StorehouseComponent,
       CategoryComponent,
-      OrdersComponent
+      OrdersComponent,
+      SubcategoryComponent
    ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './component/login/login.component';
 import{HomeComponent}from './component/home/home.component';
 import{ProductsComponent}from './component/products/products.component'
-import{RegisterComponent}from './component/register/register.component'
+
 import { Routes, RouterModule } from '@angular/router';
 import { RouteGuardServiceService } from './services/RouteGuard.service';
 import { OrdersComponent } from './component/orders/orders.component';
 import{NewOrderComponent}from './component/newOrder/newOrder.component'
 import { StorehouseComponent } from './component/storehouse/storehouse.component';
+import { LoginComponent } from './component/login/login.component';
+import { RegisterComponent } from './component/register/register.component';
+import { CategoryComponent } from './component/category/category.component';
+import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 
 const routes: Routes = [
   {path:'', component : LoginComponent},
@@ -18,6 +21,7 @@ const routes: Routes = [
   {path:'orders', component : OrdersComponent, canActivate:[RouteGuardServiceService]},
   {path:'newOrder', component : NewOrderComponent, canActivate:[RouteGuardServiceService]},
   {path:'storehouse', component : StorehouseComponent,canActivate:[RouteGuardServiceService]},
+  {path:'categories/:id', component: SubcategoryComponent, canActivate:[RouteGuardServiceService]}
 ];
 
 @NgModule({

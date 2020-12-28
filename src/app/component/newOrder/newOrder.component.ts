@@ -14,6 +14,7 @@ import { MessageService } from 'primeng/api';
 })
 export class NewOrderComponent implements OnInit {
   
+  showAddDialog:boolean=false;
   productDialog: boolean;
   products: Product[]=[];
   product: Product={};
@@ -40,11 +41,24 @@ export class NewOrderComponent implements OnInit {
    );
   }
   addToOrder(productToAdd:Product){
-    var e:Element={product:productToAdd,quantity:1}
-    this.elements.push(e);
+    
+      var e:Element=this.elements.find(p=>p.product===productToAdd);
+
+      if (e==undefined){ 
+        var ne:Element={product:productToAdd,quantity:1};
+        this.elements.push(ne)
+      }
+      else{
+        e.quantity+=1;
+      }
+    
   }
   removeElement(elementToRemove:Element){
     
     this.elements=this.elements.filter(obj=>obj!=elementToRemove)
+  }
+
+  toggleAddDialog(){
+    this.showAddDialog= !this.showAddDialog;
   }
 }
