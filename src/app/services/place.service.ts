@@ -14,5 +14,8 @@ constructor(private http:HttpClient) { }
 getPlace(id: number): Observable<Place> {
   return this.http.get<Place>(`${environment.API_URL}/storehouse/place?id=${id}`);
 }
+getAllPlaces(){
+  return this.http.get<Place[]>(`${environment.API_URL}/storehouse/places`);
+}
 
 }

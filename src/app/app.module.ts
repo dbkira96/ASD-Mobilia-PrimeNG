@@ -32,11 +32,11 @@ import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/newOrder/newOrder.component';
 import {CarouselModule} from 'primeng/carousel';
 import { CategoryComponent } from './component/category/category.component';
-import { FormBuilder } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { StorehouseComponent } from './component/storehouse/storehouse.component';
 import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -50,7 +50,7 @@ import { SubcategoryComponent } from './component/subcategory/subcategory.compon
       RegisterComponent,
       OrdersComponent,
       NewOrderComponent,
-
+    StorehouseComponent,
       CategoryComponent,
       OrdersComponent,
       SubcategoryComponent

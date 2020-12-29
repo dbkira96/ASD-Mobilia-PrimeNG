@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Profile } from 'src/app/domain/Profile';
@@ -16,6 +16,7 @@ import { AuthService } from '../../services/auth.service';
 
 export class RegisterComponent implements OnInit {
 
+  isAuthenticate: Boolean = false;
   constructor(
     private route: Router,
     private authService: AuthService,
@@ -23,12 +24,8 @@ export class RegisterComponent implements OnInit {
   ) { }
   // newAccount= new Account(new User("admin","admin@mobilia.com","admin"),new Profile("DIO","Brando","MALE","KONODIODA","M",new Date(),0,"../../assets/images/dio.jpg"),"EMPLOYEE"); 
   newAccount = new Account(new User("", "", ""), new Profile("", "", "", "", ""), "EMPLOYEE");
-  isAuthenticate: Boolean = false;
-
-
 
   ngOnInit() {
-
   }
 
   onClose() {

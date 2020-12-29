@@ -5,137 +5,147 @@
   <p-card class="p-ml-10 p-mr-10">
 
     <div class="p-formgroup-column p-col p-jc-center "></div>
-      <p-header class="p-d-flex p-jc-center">
-        <img src="../../assets/images/logo.png">
-      </p-header>
-      <form #f="ngForm">
-        <!--validation for field Username-->
-        <div class="form-group">
-          <label for="inUsername">Username</label>
-          <input required minlength="3" id="inUsername" #inUsername="ngModel" class="form-control"
-            [ngModelOptions]="{standalone: true}" type="text" pInputText [(ngModel)]="newAccount.userDto.username">
-          <div *ngIf="inUsername.dirty && inUsername.touched && inUsername.invalid">
-            <div class="alert-danger" *ngIf="inUsername.errors.required">
-              The field username is required
-            </div>
-            <div class="alert-danger" *ngIf="inUsername.errors.minlength">
-              The min length of username is {{inUsername.errors.minlength.requiredLength}} chars
-            </div>
+    <p-header class="p-d-flex p-jc-center">
+      <img src="../../assets/images/logo.png">
+    </p-header>
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && registerUser()" novalidate>
+      <!--validation for field Username-->
+
+      <div class="form-group">
+        <label for="inUsername">Username</label>
+        <input required minlength="3" id="inUsername" name="inUsername" #inUsername="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && inUsername.invalid }" class="form-control" type="text" pInputText
+          [(ngModel)]="newAccount.userDto.username">
+        <div *ngIf="inUsername.dirty  && inUsername.touched && inUsername.invalid">
+          <div class="alert-danger" *ngIf="inUsername.errors.required">
+            The field username is required
+          </div>
+          <div class="alert-danger" *ngIf="inUsername.errors.minlength">
+            The min length of username is {{inUsername.errors.minlength.requiredLength}} chars
           </div>
         </div>
-        <!--validation for field password-->
-        <div class="form-group">
-          <label for="inPassword">Password</label>
-          <input required minlength="6"
-            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}" id="inPassword"
-            #inPassword="ngModel" class="form-control" [ngModelOptions]="{standalone: true}" type="password" pInputText
-            [(ngModel)]="newAccount.userDto.password">
-          <div *ngIf="inPassword.dirty && inPassword.touched && inPassword.invalid">
-            <div class="alert-danger" *ngIf="inPassword.errors.required">
-              The field password is required
-            </div>
-            <div class="alert-danger" *ngIf="inPassword.errors.minlength">
-              The min length of password is {{inPassword.errors.minlength.requiredLength}}
-            </div>
+      </div>
+      <!--validation for field password-->
+      <div class="form-group">
+        <label for="inPassword">Password</label>
+        <input required minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+          id="inPassword" name="inPassword" #inPassword="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && inPassword.invalid }" class="form-control" type="password"
+          pInputText [(ngModel)]="newAccount.userDto.password">
+        <div *ngIf="inPassword.dirty && inPassword.touched && inPassword.invalid">
+          <div class="alert-danger" *ngIf="inPassword.errors.required">
+            The field password is required
+          </div>
+          <div class="alert-danger" *ngIf="inPassword.errors.minlength">
+            The min length of password is {{inPassword.errors.minlength.requiredLength}}
           </div>
         </div>
-        <!--validation for field email-->
-        <div class="form-group">
-          <label for="inEmail">Email</label>
-          <input required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="inEmail" #inEmail="ngModel" class="form-control" [ngModelOptions]="{standalone: true}"
-            type="email" pInputText [(ngModel)]="newAccount.userDto.email">
-            <div *ngIf="inEmail.dirty &&  inEmail.invalid">         
-              <div class="alert-danger" *ngIf="inEmail.errors.required">
-                The field email is required
-              </div>
-              <div class="alert-danger" *ngIf="inEmail.errors.pattern">
-                The field email isn't valid 
-              </div>
-            </div>
-        </div>
-        <!--validation for field Name-->
-        <div class="form-group">
-          <label for="inName">Name</label>
-          <input required pattern="[a-zA-Z\s]*" minlength="3" id="inName" #inName="ngModel" class="form-control"
-            [ngModelOptions]="{standalone: true}" type="text" pInputText [(ngModel)]="newAccount.profileDto.name">
-          <div *ngIf="inName.dirty && inName.touched &&  inName.invalid">
-            <div class="alert-danger" *ngIf="inName.errors.pattern">
-              The field name must contain only characters 
-            </div>
-            <div class="alert-danger" *ngIf="inName.errors.required">
-              The field name is required
-            </div>
-            <div class="alert-danger" *ngIf="inName.errors.minlength">
-              The min length of name is {{inName.errors.minlength.requiredLength}} chars
-            </div>
+      </div>
+      <!--validation for field email-->
+      <div class="form-group">
+        <label for="inEmail">Email</label>
+        <input required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" id="inEmail" name="inEmail"
+          #inEmail="ngModel" [ngClass]="{ 'is-invalid': f.submitted && inEmail.invalid }" class="form-control"
+          type="text" pInputText [(ngModel)]="newAccount.userDto.email">
+        <div *ngIf="inEmail.dirty && inEmail.touched &&  inEmail.invalid">
+          <div class="alert-danger" *ngIf="inEmail.errors.required">
+            The field email is required
           </div>
-
-        </div>
-
-        <!--validation for field surname-->
-        <div class="form-group">
-          <label for="inSurname">Surname</label>
-          <input required pattern="[a-zA-Z\s]*" minlength="3" id="inSurname" #inSurname="ngModel" class="form-control"
-            [ngModelOptions]="{standalone: true}" type="text" pInputText [(ngModel)]="newAccount.profileDto.surname">
-          <div *ngIf="inSurname.dirty && inSurname.touched &&  inSurname.invalid">
-            <div class="alert-danger" *ngIf="inSurname.errors.pattern">
-              The field surname must contain only characters
-            </div>
-            <div class="alert-danger" *ngIf="inSurname.errors.required">
-              The field surname is required
-            </div>
-            <div class="alert-danger" *ngIf="inSurname.errors.minlength">
-              The min length of surname is {{inSurname.errors.minlength.requiredLength}} chars
-            </div>
+          <div class="alert-danger" *ngIf="inEmail.errors.pattern">
+            The field email isn't valid
           </div>
-
         </div>
-        <!--validation for field cf-->
-        <div class="form-group">
-          <label for="infiscal">Fiscal Code</label>
-          <input required minlength=16 maxlength="16" id="infiscal" #infiscal="ngModel" class="form-control"
-            [ngModelOptions]="{standalone: true}" type="text" pInputText [(ngModel)]="newAccount.profileDto.fiscalCode">
-          <div *ngIf="infiscal.dirty && infiscal.touched &&  infiscal.invalid">
-            <div class="alert-danger" *ngIf="infiscal.errors.pattern">
-              The field fiscal code pattern isn't correct
-            </div>
-            <div class="alert-danger" *ngIf="infiscal.errors.required">
-              The field fiscal code is required
-            </div>
-            <div class="alert-danger" *ngIf="infiscal.errors.maxlength">
-              The length of fiscal code is {{infiscal.errors.maxlength.requiredLength}} alpha
-            </div>
-            <div class="alert-danger" *ngIf="infiscal.errors.minlength">
-              The length of fiscal code is {{infiscal.errors.minlength.requiredLength}} alpha
-            </div>
+      </div>
+      <!--validation for field Name-->
+      <div class="form-group">
+        <label for="inName">Name</label>
+        <input required pattern="[a-zA-Z\s]*" minlength="3" id="inName" name="inName" #inName="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && inName.invalid }" class="form-control" type="text" pInputText
+          [(ngModel)]="newAccount.profileDto.name">
+        <div *ngIf="inName.dirty && inName.touched &&  inName.invalid">
+          <div class="alert-danger" *ngIf="inName.errors.pattern">
+            The field name must contain only characters
           </div>
-
-
-
-
-        </div>
-        <!--validation for field address-->
-        <div class="form-group">
-          <label for="inAddress">Address</label>
-          <input required id="inAddress" #inAddress="ngModel" class="form-control" [ngModelOptions]="{standalone: true}"
-            type="text" pInputText [(ngModel)]="newAccount.profileDto.address">
-
-          <div *ngIf="inAddress.dirty && inAddress.touched &&  inAddress.invalid">         
-            <div class="alert-danger" *ngIf="inAddress.errors.required">
-              The field address is required
-            </div>
+          <div class="alert-danger" *ngIf="inName.errors.required">
+            The field name is required
+          </div>
+          <div class="alert-danger" *ngIf="inName.errors.minlength">
+            The min length of name is {{inName.errors.minlength.requiredLength}} chars
           </div>
         </div>
 
-        <!--validation form submit button-->
-        <button pButton label="Register" icon="pi pi-check" iconPos="left" [disabled]="f.invalid"
-          (click)=registerUser()></button>
+      </div>
 
-      </form>
-      <p-footer>
-        <img src="../../assets/images/logo2.png" style="height:30px">
-      </p-footer>
-   
+      <!--validation for field surname-->
+      <div class="form-group">
+        <label for="inSurname">Surname</label>
+        <input required pattern="[a-zA-Z\s]*" minlength="3" id="inSurname" name="inSurname" #inSurname="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && inSurname.invalid }" class="form-control" type="text" pInputText
+          [(ngModel)]="newAccount.profileDto.surname">
+        <div *ngIf="inSurname.dirty && inSurname.touched &&  inSurname.invalid">
+          <div class="alert-danger" *ngIf="inSurname.errors.pattern">
+            The field surname must contain only characters
+          </div>
+          <div class="alert-danger" *ngIf="inSurname.errors.required">
+            The field surname is required
+          </div>
+          <div class="alert-danger" *ngIf="inSurname.errors.minlength">
+            The min length of surname is {{inSurname.errors.minlength.requiredLength}} chars
+          </div>
+        </div>
+
+      </div>
+      <!--validation for field cf-->
+      <div class="form-group">
+        <label for="infiscal">Fiscal Code</label>
+        <input required minlength=16 maxlength="16" id="infiscal" name="infiscal" #infiscal="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && infiscal.invalid }" class="form-control" type="text" pInputText
+          [(ngModel)]="newAccount.profileDto.fiscalCode">
+        <div *ngIf="infiscal.dirty && infiscal.touched &&  infiscal.invalid">
+          <div class="alert-danger" *ngIf="infiscal.errors.pattern">
+            The field fiscal code pattern isn't correct
+          </div>
+          <div class="alert-danger" *ngIf="infiscal.errors.required">
+            The field fiscal code is required
+          </div>
+          <div class="alert-danger" *ngIf="infiscal.errors.maxlength">
+            The length of fiscal code is {{infiscal.errors.maxlength.requiredLength}} alpha
+          </div>
+          <div class="alert-danger" *ngIf="infiscal.errors.minlength">
+            The length of fiscal code is {{infiscal.errors.minlength.requiredLength}} alpha
+          </div>
+        </div>
+
+
+
+
+      </div>
+      <!--validation for field address-->
+      <div class="form-group">
+        <label for="inAddress">Address</label>
+        <input required id="inAddress" name="inAddress" #inAddress="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && inAddress.invalid }" class="form-control" type="text" pInputText
+          [(ngModel)]="newAccount.profileDto.address">
+
+        <div *ngIf="inAddress.dirty && inAddress.touched &&  inAddress.invalid">
+          <div class="alert-danger" *ngIf="inAddress.errors.required">
+            The field address is required
+          </div>
+        </div>
+      </div>
+
+      <!--validation form submit button -->
+      <div class="form-group">
+        <button type="submit" pButton [disabled]="f.invalid" label="Register" icon="pi pi-check"
+          iconPos="left"></button>
+      </div>
+      <!-- {{f.value | json}}  -->
+
+    </form>
+    <p-footer>
+      <img src="../../assets/images/logo2.png" style="height:30px">
+    </p-footer>
+
 
   </p-card>
   <div class="p-col"></div>
