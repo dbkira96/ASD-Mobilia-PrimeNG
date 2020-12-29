@@ -8,17 +8,20 @@ import { environment } from 'src/environments/environment';
 })
 export class OrderDataService {
 
-constructor(
-  private httpClient:HttpClient
-) { }
+  constructor(
+    private httpClient:HttpClient
+  ) { }
 
-getOrders() {
-  return this.httpClient.get<Order[]>(`${environment.API_URL}/storehouse/commands`);
-}
+  getOrders() {
+    return this.httpClient.get<Order[]>(`${environment.API_URL}/storehouse/commands`);
+  }
 
-deleteOrder(order: Order) {
-  return this.httpClient.delete(`${environment.API_URL}/storehouse/command/delete?commandId=${order.id}`);
-}
+  deleteOrder(order: Order) {
+    return this.httpClient.delete(`${environment.API_URL}/storehouse/command/delete?commandId=${order.id}`);
+  }
 
+  placeOrder(order:Order){
+    return this.httpClient.post<Order>(`${environment.API_URL}/storehouse/commands`,order)
+  }
 
 }

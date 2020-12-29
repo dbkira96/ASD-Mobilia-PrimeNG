@@ -18,6 +18,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {DialogModule} from 'primeng/dialog';
+import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,7 +77,8 @@ import { SubcategoryComponent } from './component/subcategory/subcategory.compon
     CalendarModule,
     KeyFilterModule,
     DialogModule,
-    InputNumberModule
+    InputNumberModule,
+    CheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -44,7 +44,7 @@
 </p-table>
   </p-card> 
   <p-card  class="p-d-flex p-flex-column p-m-2">
-    <p-table #dt [value]="elements" [rows]="20" [paginator]="false"
+    <p-table #dt [value]="order.elements" [rows]="20" [paginator]="false"
     [rowHover]="true" dataKey="id" [globalFilterFields]="['name']" 
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
         <ng-template pTemplate="caption">
@@ -79,5 +79,28 @@
             <button pButton label="Confirm Order" > </button>
         </div>
   </p-card>
-        
+<p-dialog [(visible)]="showAddDialog" [style]="{width: '450px'}" header="Add Product by code" [modal]="true"
+  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+     <!--  <img [src]="'assets/showcase/images/demo/product/'" [alt]="product.name" class="product-image" *ngIf="false"> -->
+  </ng-template>
+  <div class="p-field">
+      
+      <label for="name">Product ID</label>
+    <div class="p-inputgroup">
+      <input type="text" pInputText id="prodId" [(ngModel)]="selectedID" required autofocus /> 
+      <button class="p-ml-0" pButton pRipple icon="pi pi-plus"  (click)="addProductById()"></button>
+    </div>
+  </div>
+  <div class="p-field-checkbox">
+    <p-checkbox [(ngModel)]="multipleAdd" [binary]='true' inputId="binary"></p-checkbox>
+    <label for="binary">multiple add</label> 
+</div>
+  
+  <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="toggleAddDialog()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-toast position="top-center" key="tc" ></p-toast> 
 </div>

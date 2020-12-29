@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import{Product} from '../../domain/Product'
 import{Element} from '../../domain/Element'
+import{Order} from  '../../domain/Order'
 import{ProductDataService}from '../../services/data/ProductData.service'
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
@@ -16,11 +17,16 @@ export class NewOrderComponent implements OnInit {
   
   showAddDialog:boolean=false;
   productDialog: boolean;
+  multipleAdd:boolean=false;
+  
+  selectedID:number;
   products: Product[]=[];
   product: Product={};
 
-  elements:Element[]=[];
+  order:Order={}
   element:Element={}
+
+  
 
   subcategories: string[]=[]; // non subcategories: string[]
   selectedSub:string;
@@ -37,16 +43,19 @@ export class NewOrderComponent implements OnInit {
       data => {​​
       this.products = data;
     }​​
-
+    
    );
+   this.order.elements=[];
+   this.order.user=JSON.parse(sessionStorage.getItem("user"))
+   this.order.state="NOT_TRANSMITTED"
   }
   addToOrder(productToAdd:Product){
     
-      var e:Element=this.elements.find(p=>p.product===productToAdd);
+      var e:Element=this.order.elements.find(p=>p.product===productToAdd);
 
       if (e==undefined){ 
         var ne:Element={product:productToAdd,quantity:1};
-        this.elements.push(ne)
+        this.order.elements.push(ne)
       }
       else{
         e.quantity+=1;
@@ -55,10 +64,24 @@ export class NewOrderComponent implements OnInit {
   }
   removeElement(elementToRemove:Element){
     
-    this.elements=this.elements.filter(obj=>obj!=elementToRemove)
+    this.order.elements=this.order.elements.filter(obj=>obj!=elementToRemove)
   }
 
   toggleAddDialog(){
     this.showAddDialog= !this.showAddDialog;
+  }
+  addProductById(){
+    var e:Product=this.products.find(p=>p.id==this.selectedID);
+
+      if (e==undefined){ 
+        this.messageService.clear()
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error: product not present' })
+      }
+      else{
+        this.messageService.clear()
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Added', detail: 'product successfully added ' })
+        this.addToOrder(e) 
+        this.showAddDialog=this.multipleAdd
+      }
   }
 }
