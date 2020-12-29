@@ -20,7 +20,8 @@ export class ProductsComponent implements OnInit {
   selectedSub: string;
   submitted: boolean;
   search = "";
-
+  newproduct:boolean;
+  imageSrc:string;
   subcategories: string[] = [];
   vendors: string[] = [];
 
@@ -73,19 +74,25 @@ export class ProductsComponent implements OnInit {
       place: { id: 0, shelf: { id: 0 } }
     };
     this.productDialog = true;
+    this.newproduct=true;
     this.update = false;
   }
 
   editProduct(product: Product) {
+    
     this.product = { ...product };
     this.productDialog = true;
+    this.newproduct=false;
     this.update = true;
-  }
 
+  }
+  selected(){
+    alert(this.select_vendor)
+  }
   saveProduct() {
-    this.product.subcategory.name = this.select_subcategory;
-    this.product.vendor.name = this.select_vendor;
+    
     if (this.update) {
+      
       this.productData.update(this.product).subscribe(
         response => {
           this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'product updated' });
@@ -96,6 +103,9 @@ export class ProductsComponent implements OnInit {
       );
     }
     else {
+     
+      this.product.subcategory.name = this.select_subcategory;
+      this.product.vendor.name = this.select_vendor;
       this.productData.save(this.product).subscribe(
         response => {
           this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'product saved' });
@@ -142,6 +152,24 @@ export class ProductsComponent implements OnInit {
 
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
+  }
+
+  readUrl(event:any){
+    const reader=new FileReader();
+    if(event.target.files && event.target.files.length){
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      if( this.product){
+        reader.onload = ()=>
+        this.product.photo = reader.result as string;
+        
+      }
+      else{
+      reader.onload = ()=>
+        this.imageSrc = reader.result as string;
+      }
+    }
+
   }
 
 
