@@ -4,4 +4,6 @@ export class Shelf{
 
     id?:number;
 
+    constructor(i:number){this.id = i;}
+
 }

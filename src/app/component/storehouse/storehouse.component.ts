@@ -23,6 +23,7 @@ export class StorehouseComponent implements OnInit {
   products: Product[] = [];
   shelfs: Shelf[] = [];
   places:Place[] = [];
+  s:number[] = [];
 
   constructor(
     private productData: ProductDataService,
@@ -49,16 +50,23 @@ export class StorehouseComponent implements OnInit {
         console.log(this.places);
         console.log("shelfs:");
 
-        this.places.forEach(
-          p=>{
-            if (this.shelfs.indexOf(p.shelf)!==-1){ this.shelfs.push(p.shelf);}
+      for(var i = 0; i < this.places.length;i++)
+      {
+        this.s.push(this.places[i].shelf.id);
+        
+      }
 
-          }
-        );
+        
         /* this.shelfs = this.getShelfs(this.places);
         this.shelfs.sort();
         let uniqueshelfs=[...new Set(this.shelfs)]
         this.shelfs = uniqueshelfs; */
+        this.s.sort();
+        var unique = this.s.filter((v, i, a) => a.indexOf(v) === i); 
+        for(var i = 0; i < unique.length;i++)
+        {
+          this.shelfs.push(new Shelf(unique[i]));
+        }
         console.log(this.shelfs);
 
       }
