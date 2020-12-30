@@ -38,6 +38,8 @@ import { RegisterComponent } from './component/register/register.component';
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { SlideMenuModule } from 'primeng/slidemenu';
+
 
 @NgModule({
   declarations: [							
@@ -78,7 +80,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     KeyFilterModule,
     DialogModule,
     InputNumberModule,
-    CheckboxModule
+    CheckboxModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    SlideMenuModule,
+    ButtonModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
