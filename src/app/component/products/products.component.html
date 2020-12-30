@@ -125,16 +125,10 @@
         <label for="price">Price</label>
         <p-inputNumber id="price" [(ngModel)]="product.price"> </p-inputNumber>
     </div>
-    <div>
-        <input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
-    </div>
-    <div>
-        <img *ngIf="product" [src]="product.photo" height="120">
-
-        <img *ngIf="this.imageSrc" [src]="this.imageSrc" height="120">
-        <button pButton Button label="SELECT IMAGE"
-            icon="pi pi-upload p-button-icon p-button-icon-left ng-star-inserted"
-            (click)="selectedFile.click()"></button>
+    
+    <div class="p-field">
+        <label for="photo">Photo</label>
+        <input id="photo" pInputText [(ngModel)]="product.photo" placeholder="Insert a link to an image"/> 
 
     </div>
     <ng-template pTemplate="footer">
