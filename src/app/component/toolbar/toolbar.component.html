@@ -1,23 +1,40 @@
 <p-toolbar>
+
+
   <div class="p-toolbar-group-left">
-    <button pButton type="button" class="p-button-raised p-button-text" icon="pi pi-bars"></button>
+    <button #btn type="button" pButton icon="pi pi-bars" class="p-button-raised p-button-text"
+      (click)="menu.toggle($event)"></button>
+    <p-slideMenu #menu [model]="items" [popup]="true" [viewportHeight]="250"></p-slideMenu>
+
   </div>
   <div>
     <div class="p-d-flex">
-  <a href="/home">
-    <b>  
-        <img src="assets/images/logo3.png" alt="home"/>
-    </b>
-    <span>      
-        <img src="assets/images/logo-text-mobilia.png"  alt="home"/>           
-    </span>
-  </a>
-</div>
-</div>
-        
-  
+      <a href="/home">
+        <b>
+          <img src="assets/images/logo3.png" alt="home" />
+        </b>
+        <span>
+          <img src="assets/images/logo-text-mobilia.png" alt="home" />
+        </span>
+      </a>
+    </div>
+  </div>
+
+
   <div class="p-toolbar-group-right">
+
+    <button pButton type="button" (click)="redirect('orders')" icon="pi pi-tag product-category-icon"
+      class="p-button-raised p-button-text"></button>
+    
+    <button pButton type="button" (click)="redirect('newOrder')" icon="pi pi-shopping-cart"
+      class="p-button-raised p-button-text"></button>
+
+
+    <button pButton type="button" (click)="redirect('register')" icon="pi pi-user"
+      class="p-button-raised p-button-text"></button>
+
     <button pButton type="button" (click)="logout()" class="p-button-raised p-button-text"
       icon="pi pi-power-off"></button>
+
   </div>
 </p-toolbar>
