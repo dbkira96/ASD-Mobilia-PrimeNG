@@ -40,6 +40,7 @@ import { SubcategoryComponent } from './component/subcategory/subcategory.compon
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SlideMenuModule } from 'primeng/slidemenu';
+import { UsersComponent } from './component/users/users.component';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { SlideMenuModule } from 'primeng/slidemenu';
     StorehouseComponent,
       CategoryComponent,
       OrdersComponent,
+      UsersComponent,
       SubcategoryComponent
    ],
   imports: [

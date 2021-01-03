@@ -20,6 +20,7 @@ export class ToolbarComponent implements OnInit {
 
       { label: 'Products', routerLink: ['/products'] },
       { label: 'Categories', routerLink: ['/home'] },
+      { label: 'Users', routerLink: ['/users'] },
 
     ]
   }
