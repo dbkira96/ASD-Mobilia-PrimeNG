@@ -28,6 +28,7 @@ import { ProductsComponent } from './component/products/products.component';
 import { ProductComponent } from './component/product/product.component';
 import { ToolbarComponent } from './component/toolbar/toolbar.component';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {RadioButtonModule} from 'primeng/radiobutton';
 import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/newOrder/newOrder.component';
 import {CarouselModule} from 'primeng/carousel';
@@ -78,7 +79,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     KeyFilterModule,
     DialogModule,
     InputNumberModule,
-    CheckboxModule
+    CheckboxModule,
+    RadioButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
