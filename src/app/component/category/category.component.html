@@ -1,27 +1,29 @@
-<div class="card" >
+<div>
+	<app-toolbar></app-toolbar>
+</div>
+<div class="card">
 	<p-dataView #dv [value]="categories" layout="grid">
-		<ng-template let-category pTemplate="listItem" >
-			<div class="p-col-12" >
+		<ng-template let-category pTemplate="listItem">
+			<div class="p-col-12">
 				<div class="category-list-item" [routerLink]="['/categories',category.id]">
 					<div class="category-list-detail">
-                       <img src="assets/images/categories/Decoration.png" />
-                        <div class="category-name">{{category.name}}</div>
+						<img src="assets/images/categories/Decoration.png" />
+						<div class="category-name">{{category.name}}</div>
 					</div>
 				</div>
 			</div>
 		</ng-template>
-		<ng-template let-category pTemplate="gridItem" >
+		<ng-template let-category pTemplate="gridItem">
 			<div class="p-col-12 p-md-4" [routerLink]="['/categories',category.id]">
 				<div class="category-grid-item card">
-                    
+
 					<div class="category-grid-item-content">
-                        <img src= '{{ "assets/images/categories/" + category.name + ".png" }}' />
+						<img src='{{ "assets/images/categories/" + category.name + ".png" }}' />
 						<div class="category-name">{{category.name}}</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</ng-template>
 	</p-dataView>
 </div>
-

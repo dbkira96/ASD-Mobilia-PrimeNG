@@ -1,61 +1,83 @@
-<div class="p-d-flex p-flex-column " > 
-  <div>
-     <app-toolbar></app-toolbar>
-  </div>
-  <div>
-    <app-category></app-category> 
-  </div>
-  <div class="p-d-flex p-flex-row">
-      
+<div>
+  <app-toolbar></app-toolbar>
+</div>
+<!-- >
+  <div class="p-d-flex p-flex-column ">
+    <div class="p-d-flex p-flex-row">
       <div class="p-d-flex p-mx-auto p-p-5">
-        <div class="p-d-flex p-flex-md-row p-flex-lg-row  p-flex-xl-row  p-flex-sm-column  p-ac-center">  
-          
-          <p-card header="Products" subheader="Browse the list of products."class="p-mb-2 p-mr-2 " >
-              <p-footer>
-                <div class="p-d-flex p-flex-row">
-                  <div class="p-ml-auto">
-                    <button (click)= "redirect('products')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>  
-                  </div>
-                </div>
-            </p-footer>  
-          </p-card>
-        <!-- <p-card header="Register" subheader="Register a new Employee." class="p-mb-2 p-mr-2" >
-            <p-footer>
-              <div class="p-d-flex p-flex-row">
-                <div class="p-ml-auto">
-                  <button (click)= "redirect('register')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>
-                </div>
-            </div>
-            </p-footer>
-          </p-card>--> 
-          <p-card header="Storage"  subheader="Manage the storehouse." class="p-mb-2 p-mr-2">
-            <p-footer>
-                <div class="p-d-flex p-flex-row">
-                    <div class="p-ml-auto">
-                      <button (click)= "redirect('storehouse')"  pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>
-                    </div>
-                </div>
-            </p-footer>
-          </p-card>
-          <!--<p-card header="Orders"  subheader="See the orders." class="p-mb-2 p-mr-2">
-            <p-footer>
-                <div class="p-d-flex p-flex-row">
-                    <div class="p-ml-auto">
-                      <button (click)= "redirect('orders')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>
-                    </div>
-                </div>
-            </p-footer>
-          </p-card>
-          <p-card header="New Order"  subheader="Make a new Order" class="p-mb-2 p-mr-2">
-            <p-footer>
-                <div class="p-d-flex p-flex-row">
-                    <div class="p-ml-auto">
-                      <button (click)= "redirect('newOrder')" pButton type="button" label="Go" icon="pi pi-arrow-right" iconPos="right" class="p-button-text p-button-text"></button>
-                    </div>
-                </div>
-            </p-footer>
-          </p-card>-->
-        </div> 
-      </div>
+        <div class="p-d-flex p-flex-md-row p-flex-lg-row  p-flex-xl-row  p-flex-sm-column  p-ac-center">
+<-->
+<div class="p-grid" style="margin-top: 2rem; margin-left: 3rem; margin-right: 3rem;" >
+  <div class="p-col-4">
+    <p-card header="Products" subheader="Browse the list of products." class="p-mb-2 p-mr-2 ">
+      <p-footer>
+        <div class="p-d-flex p-flex-row">
+          <div class="p-ml-auto">
+            <button (click)="redirect('products')" pButton type="button" label="Go" icon="pi pi-arrow-right"
+              iconPos="right" class="p-button-text p-button-text"></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-card>
+  </div>
+  <div class="p-col-4">
+    <p-card header="Categories" subheader="Browse all the categories." class="p-mb-2 p-mr-2 ">
+      <p-footer>
+        <div class="p-d-flex p-flex-row">
+          <div class="p-ml-auto">
+            <button (click)="redirect('category')" pButton type="button" label="Go" icon="pi pi-arrow-right"
+              iconPos="right" class="p-button-text p-button-text"></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-card>
+  </div>
+  <div class="p-col-4">
+    <p-card header="Storage" subheader="Manage the storehouse." class="p-mb-2 p-mr-2">
+      <p-footer>
+        <div class="p-d-flex p-flex-row">
+          <div class="p-ml-auto">
+            <button (click)="redirect('storehouse')" pButton type="button" label="Go" icon="pi pi-arrow-right"
+              iconPos="right" class="p-button-text p-button-text"></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-card>
+  </div>
+  <div class="p-col-4">
+    <p-card header="New Order" subheader="Make a new Order" class="p-mb-2 p-mr-2">
+      <p-footer>
+        <div class="p-d-flex p-flex-row">
+          <div class="p-ml-auto">
+            <button (click)="redirect('newOrder')" pButton type="button" label="Go" icon="pi pi-arrow-right"
+              iconPos="right" class="p-button-text p-button-text"></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-card>
+  </div>
+  <div class="p-col-4">
+    <p-card header="Orders" subheader="See the orders." class="p-mb-2 p-mr-2">
+      <p-footer>
+        <div class="p-d-flex p-flex-row">
+          <div class="p-ml-auto">
+            <button (click)="redirect('orders')" pButton type="button" label="Go" icon="pi pi-arrow-right"
+              iconPos="right" class="p-button-text p-button-text"></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-card>
+  </div>
+  <div class="p-col-4">
+    <p-card header="Users" subheader="Manage the users." class="p-mb-2 p-mr-2">
+      <p-footer>
+        <div class="p-d-flex p-flex-row">
+          <div class="p-ml-auto">
+            <button (click)="redirect('users')" pButton type="button" label="Go" icon="pi pi-arrow-right"
+              iconPos="right" class="p-button-text p-button-text"></button>
+          </div>
+        </div>
+      </p-footer>
+    </p-card>
   </div>
 </div>

@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     private messageService: MessageService
   ) { }
   // newAccount= new Account(new User("admin","admin@mobilia.com","admin"),new Profile("DIO","Brando","MALE","KONODIODA","M",new Date(),0,"../../assets/images/dio.jpg"),"EMPLOYEE"); 
-  newAccount = new Account(new User("", "", ""), new Profile("", "", "", "", ""), "EMPLOYEE");
+  newAccount = new Account(new User(), new Profile("", "", "", "", ""), "EMPLOYEE");
 
   ngOnInit() {
   }

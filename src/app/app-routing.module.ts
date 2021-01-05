@@ -22,6 +22,7 @@ const routes: Routes = [
   {path:'orders', component : OrdersComponent, canActivate:[RouteGuardServiceService]},
   {path:'newOrder', component : NewOrderComponent, canActivate:[RouteGuardServiceService]},
   {path:'storehouse', component : StorehouseComponent,canActivate:[RouteGuardServiceService]},
+  {path:'category', component: CategoryComponent,canActivate:[RouteGuardServiceService]},
   {path:'categories/:id', component: SubcategoryComponent, canActivate:[RouteGuardServiceService]},
   {path:'users', component : UsersComponent,canActivate:[RouteGuardServiceService]}
 ];

@@ -25,12 +25,11 @@ export class ToolbarComponent implements OnInit {
     ]
   }
 
-
-
   logout() {
     this.authService.clearAll();
     this.route.navigate(['login']);
   }
+  
   redirect(target: string) {
     this.route.navigate([target]);
   }

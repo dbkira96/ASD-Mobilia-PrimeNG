@@ -1,12 +1,11 @@
 <p-toolbar>
-
-
   <div class="p-toolbar-group-left">
     <button #btn type="button" pButton icon="pi pi-bars" class="p-button-raised p-button-text"
-      (click)="menu.toggle($event)"></button>
+      (click)="menu.toggle($event)">
+    </button>
     <p-slideMenu #menu [model]="items" [popup]="true" [viewportHeight]="250"></p-slideMenu>
-
   </div>
+
   <div>
     <div class="p-d-flex">
       <a href="/home">
@@ -20,15 +19,22 @@
     </div>
   </div>
 
-
   <div class="p-toolbar-group-right">
 
-    <button pButton type="button" (click)="redirect('orders')" icon="pi pi-tag product-category-icon"
+    <button pButton type="button" (click)="redirect('products')" icon="pi pi-list"
       class="p-button-raised p-button-text"></button>
-    
+
+    <button pButton type="button" (click)="redirect('category')" icon="pi pi-th-large"
+      class="p-button-raised p-button-text"></button>
+
+    <button pButton type="button" (click)="redirect('storehouse')" icon="pi pi-sitemap"
+      class="p-button-raised p-button-text"></button>
+
     <button pButton type="button" (click)="redirect('newOrder')" icon="pi pi-shopping-cart"
       class="p-button-raised p-button-text"></button>
 
+    <button pButton type="button" (click)="redirect('orders')" icon="pi pi-tag product-category-icon"
+      class="p-button-raised p-button-text"></button>
 
     <button pButton type="button" (click)="redirect('users')" icon="pi pi-user"
       class="p-button-raised p-button-text"></button>
