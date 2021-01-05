@@ -5,8 +5,7 @@
     <ng-template pTemplate="left">
         <button pButton pRipple label="Add shelf" icon="pi pi-plus" class="p-button-success p-mr-2"
             (click)="addShelf()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-save" class="p-button-success p-mr-2"
-            (click)="saveAll()"></button>
+            
     </ng-template>
     <ng-template pTemplate="right">
 
@@ -18,7 +17,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 3rem"></th>
-            <th pSortableColumn="Shelf">Shelf <p-sortIcon field="Shelf"></p-sortIcon></th>
+            <th pSortableColumn="Shelf">Shelf <p field="Shelf"></p></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-Shelf let-expanded="expanded">
@@ -27,15 +26,15 @@
                 <button type="button" pButton pRipple [pRowToggler]="Shelf" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td>
             <td>{{Shelf.id}}</td>
-            <td><p-button type="button" icon="pi pi-trash" (click)="deleteShelf()">  </p-button></td>
+            <td><p-button type="button" icon="pi pi-plus" (click)="addPlaceToShelf(Shelf)">  </p-button></td>
            
         </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-product>
+    <ng-template pTemplate="rowexpansion" let-shelfs>
         <tr>
             <td colspan="7">
                 <div class="p-p-3">
-                    <p-table [value]="products" dataKey="id">
+                    <p-table [value]="shelfs.places" dataKey="id">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th pSortableColumn="place">Place <p-sortIcon field="place"></p-sortIcon></th>
@@ -43,10 +42,10 @@
                                 <th style="width: 4rem"></th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-products >
+                        <ng-template pTemplate="body" let-place>
                             <tr>
-                                <td>{{products.place.id}}</td>
-                                <td><p-button type="button" icon="pi pi-trash" (click)="deletePlace()"> </p-button></td>
+                                <td >{{place.id}}</td>
+                                <td><p-button type="button" icon="pi pi-trash" (click)="deletePlace(place.id)"> </p-button></td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="emptymessage">
@@ -60,3 +59,5 @@
         </tr>
     </ng-template>
 </p-table>
+
+<p-toast position="top-center" key="tc" (onClose)="refresh()"></p-toast>
