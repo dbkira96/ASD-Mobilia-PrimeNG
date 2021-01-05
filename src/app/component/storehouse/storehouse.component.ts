@@ -23,6 +23,7 @@ export class StorehouseComponent implements OnInit {
   products: Product[] = [];
   shelfs: Shelf[] = [];
   places:Place[] = [];
+  s:number[] = [];
 
   constructor(
     private productData: ProductDataService,
@@ -49,17 +50,35 @@ export class StorehouseComponent implements OnInit {
         console.log(this.places);
         console.log("shelfs:");
 
-        this.places.forEach(
-          p=>{
-            if (this.shelfs.indexOf(p.shelf)!==-1){ this.shelfs.push(p.shelf);}
 
-          }
-        );
-        /* this.shelfs = this.getShelfs(this.places);
-        this.shelfs.sort();
-        let uniqueshelfs=[...new Set(this.shelfs)]
-        this.shelfs = uniqueshelfs; */
-        console.log(this.shelfs);
+      
+
+      for(var i = 0; i < this.places.length;i++)
+      {
+        this.s.push(this.places[i].shelf.id);
+        
+      }
+
+        this.s.sort();
+
+        var unique = this.s.filter((v, i, a) => a.indexOf(v) === i); 
+        for(var i = 0; i < unique.length;i++)
+        {
+          this.shelfs.push(new Shelf(unique[i]));
+        }
+
+
+      for(var i = 0 ; i < this.places.length;i++)
+      {
+          var p = this.places[i];
+      //  for(var k = 0; i < this.shelfs.length;k++)
+       // {}
+       var s1 : Shelf = this.shelfs.find(s2 => s2.id == p.shelf.id)
+       s1.places.push(p)
+      }
+
+      console.log(this.shelfs);
+        
 
       }
     )
@@ -81,8 +100,48 @@ export class StorehouseComponent implements OnInit {
 
   }
 
+  addShelf(){
+    console.log("sono nel addShelf");
+    this.placeData.newShelf(new Shelf(undefined)).subscribe( 
+      data => {
 
-  
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'shelf added' });
+        console.log(data);
+        var s:Shelf = data;
+        var p:Place = new Place();
+        p.shelf = s
+        this.placeData.newPlace(p).subscribe()
+      }
+    );
+    
+  }
+
+  saveAll(){
+
+  }
+  addPlaceToShelf(s:Shelf){
+     var p:Place = new Place();
+     p.shelf = s;
+     this.placeData.newPlace(p).subscribe(
+      data => {
+                this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place added' });
+              }
+     )
+
+  }
+  deletePlace(id:number){
+    console.log(id)
+     this.placeData.delete(id).subscribe(
+       data => { this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place deleted' });},
+
+       err => {this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Impossible delete this place' });}
+     );
+  }
+
+
+  refresh(): void {
+    window.location.reload();
+  }
   
 
 }
