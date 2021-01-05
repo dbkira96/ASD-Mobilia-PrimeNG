@@ -56,14 +56,10 @@ export class StorehouseComponent implements OnInit {
         
       }
 
-        
-        /* this.shelfs = this.getShelfs(this.places);
-        this.shelfs.sort();
-        let uniqueshelfs=[...new Set(this.shelfs)]
-        this.shelfs = uniqueshelfs; */
         this.s.sort();
+        
         var unique = this.s.filter((v, i, a) => a.indexOf(v) === i); 
-        for(var i = 0; i < unique.length;i++)
+        for(var i = 0; i < unique.length-1;i++)
         {
           this.shelfs.push(new Shelf(unique[i]));
         }
@@ -86,6 +82,20 @@ export class StorehouseComponent implements OnInit {
 
   onlyUnique(value,index,self){
     return self.indexOf(value) === index;
+
+  }
+
+  addShelf(){
+    
+  }
+
+  saveAll(){
+
+  }
+  deleteShelf(){
+
+  }
+  deletePlace(){
 
   }
 
