@@ -146,7 +146,7 @@ export class NewOrderComponent implements OnInit {
     this.route.navigate([target])
   }
   newOrder(){
-    window.location.reload
+    window.location.reload()
   }
   
   
