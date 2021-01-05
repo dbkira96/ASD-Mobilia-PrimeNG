@@ -44,9 +44,8 @@
 </p-table>
   </p-card> 
   <p-card  class="p-d-flex p-flex-column p-m-2">
-    <p-table #dt [value]="elements" [rows]="20" [paginator]="false"
-    [rowHover]="true" dataKey="id" [globalFilterFields]="['name']" 
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <p-table #dt [value]="order.elements" [rows]="20" [paginator]="false"
+    [rowHover]="true" dataKey="id" [globalFilterFields]="['name']" >
         <ng-template pTemplate="caption">
             <div class="p-d-flex p-ai-center p-jc-between">
                 <h5 class="p-m-0">Order</h5>
@@ -73,11 +72,81 @@
                 </td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="emptymessage"> 
+            
+            <tr>
+                <td [attr.colspan]="5">
+                    Please select items to order.
+                </td>
+            </tr>
+                
+            
+        </ng-template>
     </p-table>
         <div>
-            <p>Total:"total"</p>
-            <button pButton label="Confirm Order" > </button>
+           
+           
         </div>
+        <ng-template pTemplate="footer"> 
+            <span><h4> Total: {{total| currency:'EUR'}}</h4></span>
+            <button pButton label="Confirm Order" (click)="placeOrder()" > </button>
+        </ng-template>
   </p-card>
-        
+<p-dialog [(visible)]="showAddDialog" [style]="{width: '450px'}" header="Add Product by code" [modal]="true"
+  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+     <!--  <img [src]="'assets/showcase/images/demo/product/'" [alt]="product.name" class="product-image" *ngIf="false"> -->
+  </ng-template>
+  <div class="p-field">
+      
+      <label for="name">Product ID</label>
+    <div class="p-inputgroup">
+      <input type="text" pInputText id="prodId" [(ngModel)]="selectedID" required autofocus /> 
+      <button class="p-ml-0" pButton pRipple icon="pi pi-plus"  (click)="addProductById()"></button>
+    </div>
+  </div>
+  <div class="p-field-checkbox">
+    <p-checkbox [(ngModel)]="multipleAdd" [binary]='true' inputId="binary"></p-checkbox>
+    <label for="binary">multiple add</label> 
 </div>
+  
+  <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="toggleAddDialog()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-toast position="top-center" key="tc" ></p-toast> 
+</div>
+
+<p-dialog [(visible)]="showPaymentDialog" [style]="{width: '450px'}" header="Proceed With Payment" [modal]="true" styleClass="p-fluid">
+  
+    <div class="p-form">
+      
+      <label>Choose Payment method: </label>
+        <div>
+            <div class="p-field-radiobutton">
+                <p-radioButton name="paymentMethods" value="CASH" [(ngModel)]="selectedPayment" inputId="cash"></p-radioButton>
+                <label for="cash">cash</label>
+            </div>
+            <div class="p-field-radiobutton">
+                <p-radioButton name="paymentMethods" value="CREDIT" [(ngModel)]="selectedPayment" inputId="card" [disabled]="true"></p-radioButton>
+                <label for="card">credit card</label>
+            </div>
+        </div>
+    </div>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times"  (click)="togglePaymentDialog()"></button>
+        <button pButton pRipple label="Confirm" icon="pi pi-check"  (click)="confirmPayment()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="orderCompleted" [style]="{width: '450px'}" header="Order Completed" [modal]="true"
+  styleClass="p-fluid">
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Close" icon="pi pi-times"  (click)="redirect('home')"></button>
+        <button pButton pRipple label="New Order" icon="pi pi-check"  (click)="newOrder()"></button>
+    </ng-template>
+</p-dialog>
+
+

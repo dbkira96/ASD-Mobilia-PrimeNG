@@ -49,8 +49,15 @@
             <tr>
 
                 <td>{{product.name}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
-                        class="p-shadow-4" /></td>
+                <td>
+                    <div>
+                        <input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
+                    </div>
+                    <div>
+                        <img *ngIf="product" [src]="product.photo" height="120" class="p-shadow-4">
+                    </div>                
+                    <!--<img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
+                         />--></td>
                 <td>{{product.brand}}</td>
                 <td>{{product.color}}</td>
                 <td>{{product.subcategory.name}}</td>
@@ -71,9 +78,9 @@
 
 <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true"
     styleClass="p-fluid">
-    <ng-template pTemplate="content">
+    <!-- <ng-template pTemplate="content">
         <img [src]="'assets/showcase/images/demo/product/'" [alt]="product.name" class="product-image" *ngIf="false">
-    </ng-template>
+    </ng-template> -->
     <div class="p-field">
         <label for="name">Name</label>
         <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
@@ -86,11 +93,23 @@
         <label for="color">Color</label>
         <input type="text" pInputText id="color" [(ngModel)]="product.color" />
     </div>
-    <div class="p-field"> 
+    <div class="p-field"  *ngIf="!newproduct">
         <label for="subcategory.name">Subcategory name</label>
-        <p-dropdown [options]="subcategories" [(ngModel)]="select_subcategory" placeholder="Select a subcategory" ></p-dropdown>
+        <p-dropdown [options]="subcategories" [(ngModel)]="product.subcategory.name"  placeholder="Select a subcategory">
+        </p-dropdown>
     </div>
-    <div class="p-field">
+    <div class="p-field" *ngIf="!newproduct">
+        <label for="vendor.name">Vendor name</label>
+        <p-dropdown [options]="vendors" [(ngModel)]="product.vendor.name" placeholder="Select a vendor"></p-dropdown>
+    </div>
+   
+    <div class="p-field" *ngIf="newproduct">
+        <label for="subcategory.name">Subcategory name</label>
+        <p-dropdown [options]="subcategories" [(ngModel)]="select_subcategory"  placeholder="Select a subcategory">
+        </p-dropdown>
+    </div>
+    
+    <div class="p-field" *ngIf="newproduct">
         <label for="vendor.name">Vendor name</label>
         <p-dropdown [options]="vendors" [(ngModel)]="select_vendor" placeholder="Select a vendor"></p-dropdown>
     </div>
@@ -106,10 +125,24 @@
         <label for="price">Price</label>
         <p-inputNumber id="price" [(ngModel)]="product.price"> </p-inputNumber>
     </div>
+    
+    <div class="p-field">
+        <label for="photo">Photo</label>
+        <input id="photo" pInputText [(ngModel)]="product.photo" placeholder="Insert a link to an image"/> 
+
+    </div>
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+
+
+        <button pButton Button ppRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="hideDialog()"></button>
+
+        <button pButton Button pRipple label="Save" icon="pi pi-check" class="p-button-text"
+            (click)="saveProduct()"></button>
+
+
     </ng-template>
+
 </p-dialog>
 
 <p-toast position="top-center" key="tc" (onClose)="refresh()"></p-toast>

@@ -18,6 +18,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {CalendarModule} from 'primeng/calendar';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {DialogModule} from 'primeng/dialog';
+import {CheckboxModule} from 'primeng/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,7 @@ import { ProductsComponent } from './component/products/products.component';
 import { ProductComponent } from './component/product/product.component';
 import { ToolbarComponent } from './component/toolbar/toolbar.component';
 import {InputNumberModule} from 'primeng/inputnumber';
+import {RadioButtonModule} from 'primeng/radiobutton';
 import { OrdersComponent } from './component/orders/orders.component';
 import { NewOrderComponent } from './component/newOrder/newOrder.component';
 import {CarouselModule} from 'primeng/carousel';
@@ -36,6 +38,9 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { SlideMenuModule } from 'primeng/slidemenu';
+import { UsersComponent } from './component/users/users.component';
 
 
 @NgModule({
@@ -52,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     StorehouseComponent,
       CategoryComponent,
       OrdersComponent,
+      UsersComponent,
       SubcategoryComponent
    ],
   imports: [
@@ -76,7 +82,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     CalendarModule,
     KeyFilterModule,
     DialogModule,
-    InputNumberModule
+    InputNumberModule,
+    CheckboxModule,
+    RadioButtonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    SlideMenuModule,
+    ButtonModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
