@@ -26,4 +26,8 @@ export class OrderDataService {
   confirmOrder(orderId:string){
     return this.httpClient.get<Order>(`${environment.API_URL}/storehouse/command/confirmPayment?commandId=${orderId}`)
   }
+
+  closeOrder(orderId: string) {
+    return this.httpClient.get<Order>(`${environment.API_URL}/storehouse/command/close?commandId=${orderId}`);
+  }
 }

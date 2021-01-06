@@ -12,19 +12,30 @@
             <th>Id </th>
             <th>User </th>
             <th>State </th>
+            <th>Total </th>
             <th></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-order let-expanded="expanded">
         <tr>
             <td>
-                <button type="button" pButton pRipple [pRowToggler]="order" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                <button type="button" pButton pRipple [pRowToggler]="order"
+                    class="p-button-text p-button-rounded p-button-plain"
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td>
             <td>{{order.id}}</td>
             <td>{{order.user.username}}</td>
             <td>{{order.state}}</td>
+            <td>{{getTotal(order)}}</td>
             <td>
-                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteOrder(order)"></button>
+                <button *ngIf="order.state == 'CONFIRMED'" pButton pRipple icon="pi pi-check-circle"
+                    class="p-button-rounded p-button-success p-mr-2" (click)="close(order)"></button>
+
+                <button *ngIf="order.state == 'CLOSED'" pButton pRipple icon="pi pi-file-pdf"
+                    class="p-button-rounded p-button-success p-mr-2"></button>
+
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                    (click)="deleteOrder(order)"></button>
             </td>
         </tr>
     </ng-template>
@@ -65,4 +76,4 @@
     </ng-template>
 </p-table>
 
-<p-toast position="top-center" key="tc" (onClose) = "refresh()"></p-toast>
+<p-toast position="top-center" key="tc" (onClose)="refresh()"></p-toast>

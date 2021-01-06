@@ -37,4 +37,23 @@ export class OrdersComponent implements OnInit {
     window.location.reload();
   }
 
+  getTotal(order: Order): string {
+    let total: number = 0.00;
+    order.elements.forEach(element => {
+      total += element.product.price * element.quantity;
+    });
+    return total.toFixed(2);
+  }
+
+  close(order: Order) {
+    this.orderDataService.closeOrder(order.id).subscribe(
+      response => {
+        this.messageService.add({key: 'tc', severity:'success', summary: 'Service Message', detail: 'Order closed'});
+      },
+      err=>{
+        this.messageService.add({key: 'tc', severity:'error', summary: 'Error', detail: 'Error on closing the order'});
+      }
+    )
+  }
+
 }

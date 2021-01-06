@@ -19,7 +19,10 @@ export class ToolbarComponent implements OnInit {
     this.items = [
 
       { label: 'Products', routerLink: ['/products'] },
-      { label: 'Categories', routerLink: ['/home'] },
+      { label: 'Categories', routerLink: ['/category'] },
+      { label: 'Storage', routerLink: ['/storehouse']},
+      { label: 'New Order' , routerLink: ['/newOrder']},
+      { label: 'Orders' , routerLink: ['/orders']},
       { label: 'Users', routerLink: ['/users'] },
 
     ]
