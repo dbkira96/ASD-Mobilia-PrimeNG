@@ -1,4 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Order } from 'src/app/domain/Order';
 import { environment } from 'src/environments/environment';
@@ -29,5 +30,38 @@ export class OrderDataService {
 
   closeOrder(orderId: string) {
     return this.httpClient.get<Order>(`${environment.API_URL}/storehouse/command/close?commandId=${orderId}`);
+  }
+
+  downloadPdf(order:Order){
+   
+    const fileName = "report.pdf";
+    this.httpClient.post(`${environment.API_URL}/storehouse/api/document`, order, {  responseType: 'blob'})
+    .subscribe((blob: Blob) => {
+    console.log('report is downloaded');
+
+    if (navigator.msSaveBlob) 
+    { 
+        // IE 10+
+        navigator.msSaveBlob(blob, fileName);
+    }
+    else 
+    {
+        let link = document.createElement("a");
+        if (link.download !== undefined) 
+        {
+            let url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", fileName);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        else
+        {
+            //html5 download not supported
+        }
+    }   
+});
   }
 }

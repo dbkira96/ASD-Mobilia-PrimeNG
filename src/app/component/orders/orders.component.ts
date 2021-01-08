@@ -56,4 +56,8 @@ export class OrdersComponent implements OnInit {
     )
   }
 
+  savePdf(order: Order) {
+    this.orderDataService.downloadPdf(order);
+  }
+
 }

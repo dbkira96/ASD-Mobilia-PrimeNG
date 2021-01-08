@@ -32,7 +32,7 @@
                     class="p-button-rounded p-button-success p-mr-2" (click)="close(order)"></button>
 
                 <button *ngIf="order.state == 'CLOSED'" pButton pRipple icon="pi pi-file-pdf"
-                    class="p-button-rounded p-button-success p-mr-2"></button>
+                (click)="savePdf(order)"  class="p-button-rounded p-button-success p-mr-2"></button>
 
                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                     (click)="deleteOrder(order)"></button>
