@@ -126,7 +126,17 @@
         <div>
             <div class="p-field-radiobutton">
                 <p-radioButton name="paymentMethods" value="CASH" [(ngModel)]="selectedPayment" inputId="cash"></p-radioButton>
-                <label for="cash">cash</label>
+                <label for="cash">Cash</label>
+            </div>
+            <div class ="p-form">
+                <div class="p-field">
+                    <label for="cashmoney">Cash</label>
+                    <p-inputNumber [(ngModel)]="cash" mode="currency" currency="EUR" locale="de-DE" inputId="cashmoney"></p-inputNumber>
+                </div>
+                <div class="p-field">
+                    <label ></label>
+                    <label><h5>Change:{{cash-total|currency:'EUR'}}</h5></label>
+                </div>
             </div>
             <div class="p-field-radiobutton">
                 <p-radioButton name="paymentMethods" value="CREDIT" [(ngModel)]="selectedPayment" inputId="card" [disabled]="true"></p-radioButton>
@@ -136,7 +146,7 @@
     </div>
     
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times"  (click)="togglePaymentDialog()"></button>
+        <button pButton pRipple label="Later" icon="pi pi-save"  (click)="payLater()"></button>
         <button pButton pRipple label="Confirm" icon="pi pi-check"  (click)="confirmPayment()"></button>
     </ng-template>
 </p-dialog>

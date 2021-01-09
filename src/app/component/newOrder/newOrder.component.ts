@@ -62,7 +62,7 @@ export class NewOrderComponent implements OnInit {
    );
    this.order.elements=[];
    this.order.user=JSON.parse(sessionStorage.getItem("user"))
-   this.order.state="NOT_TRANSMITTED"
+   this.order.state="TRANSMITTED"
   }
   addToOrder(productToAdd:Product){
     
@@ -107,7 +107,7 @@ export class NewOrderComponent implements OnInit {
       this.orderService.placeOrder(this.order).subscribe(
         o=>{ this.order=o;
           this.togglePaymentDialog()
-          console.log(this.order)
+          
       });
     }
   }
@@ -122,6 +122,12 @@ export class NewOrderComponent implements OnInit {
 
   togglePaymentDialog(){
     this.showPaymentDialog= !this.showPaymentDialog;
+  }
+  payLater(){
+    
+    this.messageService.add({ key: 'tc', severity: 'warn', summary: 'Seccess:', detail: 'remember to complete the order' })
+    this.togglePaymentDialog()
+    this.newOrder()
   }
   confirmPayment(){
     
@@ -146,7 +152,10 @@ export class NewOrderComponent implements OnInit {
     this.route.navigate([target])
   }
   newOrder(){
-    window.location.reload()
+    this.order.elements=[];
+    this.order.id=undefined;
+    this.orderCompleted=false
+    this.updateTotal()
   }
   
   
