@@ -4,7 +4,9 @@
 
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" ></button>
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="redirect('register')" >
+                
+            </button>
         </ng-template>
         <ng-template pTemplate="right">
 
@@ -28,6 +30,7 @@
             <tr>
                 <th>Username </th>
                 <th>Email</th>
+                <th>Type</th>
                 <th></th>
             </tr>
         </ng-template>
@@ -36,6 +39,7 @@
 
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
+                <td>{{user.type}}</td>
                 <td>
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
                         (click)="editUser(user)"></button>
@@ -57,6 +61,11 @@
         <label for="email">Email</label>
         <input type="text" pInputText id="email" [(ngModel)]="user.email" />
     </div>
+    <div class="p-field" >
+        <label for="type">Type</label>
+        <p-dropdown [options]="types" [(ngModel)]="user.type"  placeholder="Select type">
+        </p-dropdown>
+    </div>
     <ng-template pTemplate="footer">
 
 
@@ -64,7 +73,7 @@
             (click)="hideDialog()"></button>
 
         <button pButton Button pRipple label="Save" icon="pi pi-check" class="p-button-text"
-            (click)="saveUser()"></button>
+            (click)="updateUser()"></button>
 
 
     </ng-template>

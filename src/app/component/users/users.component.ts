@@ -3,8 +3,7 @@ import { User } from '../../domain/User'
 import { UserDataService } from '../../services/data/UserData.service'
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-import { CategoryService } from 'src/app/services/category.service';
-import { VendorService } from 'src/app/services/vendor.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-users',
@@ -20,6 +19,7 @@ import { VendorService } from 'src/app/services/vendor.service';
     submitted: boolean;
     search = "";
     newuser:boolean;
+    types: string[] = ["ADMIN", "CLERK", "EMPLOYEE"];
     error;
     
   
@@ -30,8 +30,7 @@ import { VendorService } from 'src/app/services/vendor.service';
       private userData: UserDataService,
       private messageService: MessageService,
       private confirmationService: ConfirmationService,
-      private categoryService: CategoryService,
-      private vendorService: VendorService
+      private route:Router
     ) { }
   
 
@@ -57,9 +56,7 @@ import { VendorService } from 'src/app/services/vendor.service';
     
       }
 
-      saveUser() {
-    
-        if (this.update) {
+      updateUser() {
           
           this.userData.update(this.user).subscribe(
             response => {
@@ -69,9 +66,7 @@ import { VendorService } from 'src/app/services/vendor.service';
               this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error updating the user' });
             }
           );
-        }
         
-        this.userDialog = false;
       }
 
       deleteUser(user: User) {
@@ -119,6 +114,9 @@ import { VendorService } from 'src/app/services/vendor.service';
         }
     
       }
+
+      redirect(target:string){
+        this.route.navigate([target])
+      }
   }
-  
   

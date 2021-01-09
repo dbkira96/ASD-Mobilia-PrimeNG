@@ -5,7 +5,6 @@ export class Account{
 
    constructor( public userDto:User,
     public profileDto:Profile,
-    public type:string,
     ){
 
     }
