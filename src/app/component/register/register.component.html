@@ -28,7 +28,7 @@
       <!--validation for field password-->
       <div class="form-group">
         <label for="inPassword">Password</label>
-        <input required minlength="6" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+        <input required minlength="6" 
           id="inPassword" name="inPassword" #inPassword="ngModel"
           [ngClass]="{ 'is-invalid': f.submitted && inPassword.invalid }" class="form-control" type="password"
           pInputText [(ngModel)]="newAccount.userDto.password">

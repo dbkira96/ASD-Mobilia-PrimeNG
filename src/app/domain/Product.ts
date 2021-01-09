@@ -14,4 +14,5 @@ export class Product {
     place?: Place;
     stock?: number;
     photo?:string;
+    rating?:number;
 }

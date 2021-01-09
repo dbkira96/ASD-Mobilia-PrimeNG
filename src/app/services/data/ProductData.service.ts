@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import{Product}from '../../domain/Product';
 
@@ -19,6 +20,11 @@ constructor(private HttpClient:HttpClient) { }
 
   getAllProducts(){
     return this.HttpClient.get<Product[]>(`${environment.API_URL}/storehouse/products`);
+  }
+
+   //return all products by id of subcategory
+   getAllSubcategoryByCategory(id):Observable<Product[]>{
+    return this.HttpClient.get<Product[]>(`${environment.API_URL}/storehouse/subcategories/${id}`);
   }
 
   save(product: Product) {

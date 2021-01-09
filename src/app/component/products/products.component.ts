@@ -17,11 +17,11 @@ export class ProductsComponent implements OnInit {
   productDialog: boolean;
   products: Product[] = [];
   product: Product = { subcategory: {} };
+  imageSrc:string;
   selectedSub: string;
   submitted: boolean;
   search = "";
   newproduct:boolean;
-  imageSrc:string;
   subcategories: string[] = [];
   vendors: string[] = [];
 

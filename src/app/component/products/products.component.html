@@ -55,7 +55,7 @@
                     <div>
                         <img *ngIf="product" [src]="product.photo" height="120" class="p-shadow-4">
                     </div>                
-                    <!--<img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
+                    <!--[disabled]="product.inventoryStatus === 'OUTOFSTOCK'" <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
                          />--></td>
                 <td>{{product.color}}</td>
                 <td>{{product.subcategory.name}}</td>

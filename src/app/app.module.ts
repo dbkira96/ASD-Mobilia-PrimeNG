@@ -41,7 +41,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { UsersComponent } from './component/users/users.component';
-
+import {RatingModule} from 'primeng/rating';
 
 @NgModule({
   declarations: [							
@@ -88,7 +88,9 @@ import { UsersComponent } from './component/users/users.component';
     BrowserModule,
     BrowserAnimationsModule,
     SlideMenuModule,
-    ButtonModule
+    ButtonModule,
+    RatingModule,
+
 
   ],
   providers: [],

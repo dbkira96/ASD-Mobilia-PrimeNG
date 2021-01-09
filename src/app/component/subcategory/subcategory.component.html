@@ -5,7 +5,7 @@
 	<p-dataView #dv [value]="subcategories" layout="grid">
 		<ng-template let-subcategory pTemplate="listItem">
 			<div class="p-col-12">
-				<div class="subcategory-list-item">
+				<div class="subcategory-list-item"  [routerLink]="['/product',subcategory.id]">
 					<div class="subcategory-list-detail">
 						<img
 							src='{{ "assets/images/subcategories/" + subcategory.category.id +"/"+ subcategory.name + ".png" }}' />
@@ -14,9 +14,9 @@
 				</div>
 			</div>
 		</ng-template>
-		<ng-template let-subcategory pTemplate="gridItem">
+		<ng-template let-subcategory pTemplate="gridItem" >
 			<div class="p-col-12 p-md-3">
-				<div class="subcategory-grid-item card">
+				<div class="subcategory-grid-item card"  [routerLink]="['/product',subcategory.id]">
 
 					<div class="subcategory-grid-item-content">
 						<img src='{{ "assets/images/subcategories/"+ category.id+ "/"+ subcategory.name + ".png" }}' />
