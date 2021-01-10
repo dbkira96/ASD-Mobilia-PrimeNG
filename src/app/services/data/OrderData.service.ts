@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Order } from 'src/app/domain/Order';
@@ -32,10 +32,14 @@ export class OrderDataService {
     return this.httpClient.get<Order>(`${environment.API_URL}/storehouse/command/close?commandId=${orderId}`);
   }
 
-  downloadPdf(order:Order){
-   
+  downloadPdf(order:Order, nameUser:string, addressUser:string, paymentMethodUser:string){
+    let params = new HttpParams();
+    params = params.set('nameClient', nameUser);
+    params = params.set('addressClient', addressUser);
+    params = params.set('paymentMethodClient', paymentMethodUser);
+
     const fileName = "report.pdf";
-    this.httpClient.post(`${environment.API_URL}/storehouse/api/document`, order, {  responseType: 'blob'})
+    this.httpClient.post(`${environment.API_URL}/storehouse/api/document`, order, {  responseType: 'blob',params})
     .subscribe((blob: Blob) => {
     console.log('report is downloaded');
 

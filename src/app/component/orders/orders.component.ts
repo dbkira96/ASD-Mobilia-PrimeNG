@@ -7,12 +7,15 @@ import { OrderDataService } from '../../services/data/OrderData.service';
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css'],
-  providers:[MessageService]
+  providers: [MessageService]
 })
 export class OrdersComponent implements OnInit {
-
+  order: Order;
   orders: Order[];
-  
+  userDialog: boolean;
+  nameUser: string;
+  addressUser: string;
+  paymentMethodUser: string;
   constructor(
     private messageService: MessageService,
     private orderDataService: OrderDataService
@@ -24,11 +27,11 @@ export class OrdersComponent implements OnInit {
 
   deleteOrder(order: Order) {
     this.orderDataService.deleteOrder(order).subscribe(
-      response=>{
-        this.messageService.add({key: 'tc', severity:'success', summary: 'Service Message', detail: 'Order deleted'});
+      response => {
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'Order deleted' });
       },
-      err=>{
-        this.messageService.add({key: 'tc', severity:'error', summary: 'Error', detail: 'Error on deleting the order'});
+      err => {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error on deleting the order' });
       }
     );
   }
@@ -48,16 +51,24 @@ export class OrdersComponent implements OnInit {
   close(order: Order) {
     this.orderDataService.closeOrder(order.id).subscribe(
       response => {
-        this.messageService.add({key: 'tc', severity:'success', summary: 'Service Message', detail: 'Order closed'});
+        this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'Order closed' });
       },
-      err=>{
-        this.messageService.add({key: 'tc', severity:'error', summary: 'Error', detail: 'Error on closing the order'});
+      err => {
+        this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Error on closing the order' });
       }
     )
   }
 
-  savePdf(order: Order) {
-    this.orderDataService.downloadPdf(order);
+ 
+
+  openUserDialog(order: Order) {
+    this.order = order;
+    this.userDialog = true;
   }
 
+  saveUserAndPdf() {
+    
+    this.orderDataService.downloadPdf(this.order, this.nameUser, this.addressUser, this.paymentMethodUser);
+   
+  }
 }
