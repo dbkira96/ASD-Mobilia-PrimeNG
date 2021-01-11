@@ -41,6 +41,17 @@
           </div>
         </div>
       </div>
+         <!--type-->
+         <div class="form-group">
+          <label for="Type">Type</label>
+          <div> 
+            <p-dropdown [options]="types" id="Type" name="Type" #Type="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && Type.invalid }" 
+            [(ngModel)]="newAccount.userDto.type" placeholder="Select type">
+            </p-dropdown>
+          </div>
+          
+        </div>
       <!--validation for field email-->
       <div class="form-group">
         <label for="inEmail">Email</label>

@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
     private messageService: MessageService
   ) { }
   // newAccount= new Account(new User("admin","admin@mobilia.com","admin"),new Profile("DIO","Brando","MALE","KONODIODA","M",new Date(),0,"../../assets/images/dio.jpg"),"EMPLOYEE"); 
-  newAccount = new Account(new User(), new Profile("", "", "", "", ""), "EMPLOYEE");
+  newAccount = new Account(new User(), new Profile("", "", "", "", ""));
+  types: string[] = ["ADMIN", "CLERK", "EMPLOYEE"];
 
   ngOnInit() {
   }
@@ -32,7 +33,6 @@ export class RegisterComponent implements OnInit {
     this.route.navigate(['home']);
   }
   registerUser() {
-    this.newAccount.type = "EMPLOYEE"
     this.authService.register(this.newAccount).subscribe(
       response => {
         console.log(response);
