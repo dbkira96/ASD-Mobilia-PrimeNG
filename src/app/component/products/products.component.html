@@ -54,9 +54,10 @@
                     </div>
                     <div>
                         <img *ngIf="product" [src]="product.photo" height="120" class="p-shadow-4">
-                    </div>                
+                    </div>
                     <!--[disabled]="product.inventoryStatus === 'OUTOFSTOCK'" <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
-                         />--></td>
+                         />-->
+                </td>
                 <td>{{product.color}}</td>
                 <td>{{product.subcategory.name}}</td>
                 <td>{{product.vendor.name}}</td>
@@ -76,70 +77,122 @@
 
 <p-dialog [(visible)]="productDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true"
     styleClass="p-fluid">
-    <!-- <ng-template pTemplate="content">
-        <img [src]="'assets/showcase/images/demo/product/'" [alt]="product.name" class="product-image" *ngIf="false">
-    </ng-template> -->
-    <div class="p-field">
-        <label for="name">Name</label>
-        <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus />
-    </div>
-    <div class="p-field">
-        <label for="brand">Brand</label>
-        <input type="text" pInputText id="brand" [(ngModel)]="product.brand" />
-    </div>
-    <div class="p-field">
-        <label for="color">Color</label>
-        <input type="text" pInputText id="color" [(ngModel)]="product.color" />
-    </div>
-    <div class="p-field"  *ngIf="!newproduct">
-        <label for="subcategory.name">Subcategory name</label>
-        <p-dropdown [options]="subcategories" [(ngModel)]="product.subcategory.name"  placeholder="Select a subcategory">
-        </p-dropdown>
-    </div>
-    <div class="p-field" *ngIf="!newproduct">
-        <label for="vendor.name">Vendor name</label>
-        <p-dropdown [options]="vendors" [(ngModel)]="product.vendor.name" placeholder="Select a vendor"></p-dropdown>
-    </div>
-   
-    <div class="p-field" *ngIf="newproduct">
-        <label for="subcategory.name">Subcategory name</label>
-        <p-dropdown [options]="subcategories" [(ngModel)]="select_subcategory"  placeholder="Select a subcategory">
-        </p-dropdown>
-    </div>
-    
-    <div class="p-field" *ngIf="newproduct">
-        <label for="vendor.name">Vendor name</label>
-        <p-dropdown [options]="vendors" [(ngModel)]="select_vendor" placeholder="Select a vendor"></p-dropdown>
-    </div>
-    <div class="p-field">
-        <label for="place.id">Place id</label>
-        <input type="text" pInputText id="place.id" [(ngModel)]="product.place.id" />
-    </div>
-    <div class="p-field">
-        <label for="stock">Stock</label>
-        <p-inputNumber id="stock" [(ngModel)]="product.stock"> </p-inputNumber>
-    </div>
-    <div class="p-field">
-        <label for="price">Price</label>
-        <p-inputNumber id="price" [(ngModel)]="product.price"> </p-inputNumber>
-    </div>
-    
-    <div class="p-field">
-        <label for="photo">Photo</label>
-        <input id="photo" pInputText [(ngModel)]="product.photo" placeholder="Insert a link to an image"/> 
 
-    </div>
-    <ng-template pTemplate="footer">
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && saveProduct()" novalidate>
 
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input pInputText required autofocus type="text" class="form-control" id="name" name="name" #name="ngModel"
+                [(ngModel)]="product.name" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" />
+            <div *ngIf="name.dirty  && name.touched && name.invalid">
+                <div class="alert-danger" *ngIf="name.errors.required">
+                    The field name is required
+                </div>
+            </div>
+        </div>
 
-        <button pButton Button ppRipple label="Cancel" icon="pi pi-times" class="p-button-text"
-            (click)="hideDialog()"></button>
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <input pInputText required type="text" class="form-control" id="brand" name="brand" #brand="ngModel"
+                [(ngModel)]="product.brand" [ngClass]="{ 'is-invalid': f.submitted && brand.invalid }" />
+            <div *ngIf="brand.dirty  && brand.touched && brand.invalid">
+                <div class="alert-danger" *ngIf="brand.errors.required">
+                    The field brand is required
+                </div>
+            </div>
+        </div>
 
-        <button pButton Button pRipple label="Save" icon="pi pi-check" class="p-button-text"
-            (click)="saveProduct()"></button>
+        <div class="form-group">
+            <label for="color">Color</label>
+            <input pInputText required type="text" class="form-control" id="color" name="color" #color="ngModel"
+                [(ngModel)]="product.color" [ngClass]="{ 'is-invalid': f.submitted && color.invalid }" />
+            <div *ngIf="color.dirty  && color.touched && color.invalid">
+                <div class="alert-danger" *ngIf="color.errors.required">
+                    The field color is required
+                </div>
+            </div>
+        </div>
 
+        <div class="p-field" *ngIf="!newproduct">
+            <label for="subcategory.name">Subcategory name</label>
+            <p-dropdown [options]="subcategories" [(ngModel)]="product.subcategory.name" id="subcategory" name="subcategory" #subcategory="ngModel"
+                placeholder="Select a subcategory">
+            </p-dropdown>
+        </div>
 
-    </ng-template>
+        <div class="p-field" *ngIf="!newproduct">
+            <label for="vendor.name">Vendor name</label>
+            <p-dropdown [options]="vendors" [(ngModel)]="product.vendor.name" placeholder="Select a vendor" id="vendor" name="vendor" #vendor="ngModel">
+            </p-dropdown>
+        </div>
+
+        <div class="p-field" *ngIf="newproduct">
+            <label for="subcategory.name">Subcategory name</label>
+            <p-dropdown [options]="subcategories" [(ngModel)]="select_subcategory" placeholder="Select a subcategory" id="subcategory" name="subcategory" #subcategory="ngModel" >
+            </p-dropdown>
+        </div>
+
+        <div class="p-field" *ngIf="newproduct">
+            <label for="vendor.name">Vendor name</label>
+            <p-dropdown [options]="vendors" [(ngModel)]="select_vendor" placeholder="Select a vendor" id="vendor" name="vendor" #vendor="ngModel">
+            </p-dropdown>
+        </div>
+
+        <div class="form-group">
+            <label for="place">Place ID</label>
+            <input pInputText required type="text" class="form-control" id="place" name="place" #place="ngModel"
+                [(ngModel)]="product.place.id" [ngClass]="{ 'is-invalid': f.submitted && place.invalid }" />
+            <div *ngIf="place.dirty  && place.touched && place.invalid">
+                <div class="alert-danger" *ngIf="place.errors.required">
+                    The field place is required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input pInputText required type="text" class="form-control" id="stock" name="stock" #stock="ngModel"
+                [(ngModel)]="product.stock" [ngClass]="{ 'is-invalid': f.submitted && stock.invalid }" />
+            <div *ngIf="stock.dirty  && stock.touched && stock.invalid">
+                <div class="alert-danger" *ngIf="stock.errors.required">
+                    The field stock is required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input pInputText required type="text" class="form-control" id="price" name="price" #price="ngModel"
+                [(ngModel)]="product.price" [ngClass]="{ 'is-invalid': f.submitted && price.invalid }" />
+            <div *ngIf="price.dirty  && price.touched && price.invalid">
+                <div class="alert-danger" *ngIf="price.errors.required">
+                    The field price is required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="photo">Photo</label>
+            <input pInputText required type="text" class="form-control" id="photo" name="photo" #photo="ngModel"
+                [(ngModel)]="product.photo" [ngClass]="{ 'is-invalid': f.submitted && photo.invalid }"
+                placeholder="Insert a link to an image" />
+            <div *ngIf="photo.dirty  && photo.touched && photo.invalid">
+                <div class="alert-danger" *ngIf="photo.errors.required">
+                    The field photo is required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button pButton class="p-button-danger" label="Cancel" (click)="hideDialog()" >
+            </button>
+        </div>
+        <div class="form-group">
+            <button pButton class="p-button-success" label="Save" type="submit" [disabled]="f.invalid"  >
+            </button>
+        </div>
+
+    </form>
 
 </p-dialog>
 
