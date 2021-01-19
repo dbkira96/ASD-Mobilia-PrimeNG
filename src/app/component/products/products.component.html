@@ -53,7 +53,7 @@
                         <input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
                     </div>
                     <div>
-                        <img *ngIf="product" [src]="product.photo" height="120" class="p-shadow-4">
+                        <img *ngIf="product" [src]="product.photo" height="120" >
                     </div>
                     <!--[disabled]="product.inventoryStatus === 'OUTOFSTOCK'" <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100"
                          />-->

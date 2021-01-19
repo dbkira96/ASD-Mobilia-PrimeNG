@@ -7,7 +7,12 @@
 			<div class="p-col-12">
 				<div class="category-list-item" [routerLink]="['/categories',category.id]">
 					<div class="category-list-detail">
-						<img src="assets/images/categories/Decoration.png" />
+						<div>
+							<input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
+						</div>
+						<div>
+							<img *ngIf="category" [src]="category.photo" >
+						</div>
 						<div class="category-name">{{category.name}}</div>
 					</div>
 				</div>
@@ -18,7 +23,13 @@
 				<div class="category-grid-item card">
 
 					<div class="category-grid-item-content">
-						<img src='{{ "assets/images/categories/" + category.name + ".png" }}' />
+						<!--<img *ngIf="category" [src]="category.photo" >-->
+						<div>
+							<input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
+						</div>
+						<div>
+							<img *ngIf="category" [src]="category.photo" >
+						</div>
 						<div class="category-name">{{category.name}}</div>
 					</div>
 

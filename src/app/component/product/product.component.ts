@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
   }
   
   generateRating() {
-    return Math.floor(Math.random() * Math.floor(5)+1);
+    return Math.floor(3);
 }
   
   onSortChange(event) {

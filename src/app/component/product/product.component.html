@@ -27,7 +27,7 @@
               </div>
               <div class="product-list-action">
                 <span class="product-price">${{product.price}}</span>
-                <p-button icon="pi pi-shopping-cart" label="Add to Cart"></p-button>
+               
                 <span class="product-badge">{{product.subcategory.category.name}}</span>
               </div>
             </div>
@@ -50,12 +50,12 @@
               </div>
               <div class="product-name">{{product.name}}</div>
               <p-rating [ngModel]="generateRating()" [readonly]="true" [iconOnStyle]="{'color':'#000000'}" [cancel]="false"></p-rating>
-              <div class="product-grid-item-bottom">
-                <span class="product-price">${{product.price}}</span>
-                <p-button icon="pi pi-shopping-cart"></p-button>
+              
+                <div class="product-name">${{product.price}}</div>
+               
               </div>
             </div>
-          </div>
+         
         </ng-template>
       </p-dataView>
     </div>

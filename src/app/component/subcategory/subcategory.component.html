@@ -7,8 +7,12 @@
 			<div class="p-col-12">
 				<div class="subcategory-list-item"  [routerLink]="['/product',subcategory.id]">
 					<div class="subcategory-list-detail">
-						<img
-							src='{{ "assets/images/subcategories/" + subcategory.category.id +"/"+ subcategory.name + ".png" }}' />
+						<div>
+							<input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
+						</div>
+						<div>
+							<img *ngIf="subcategory" [src]="subcategory.photo" >
+						</div>
 						<div class="subcategory-name">{{subcategory.name}}</div>
 					</div>
 				</div>
@@ -19,7 +23,12 @@
 				<div class="subcategory-grid-item card"  [routerLink]="['/product',subcategory.id]">
 
 					<div class="subcategory-grid-item-content">
-						<img src='{{ "assets/images/subcategories/"+ category.id+ "/"+ subcategory.name + ".png" }}' />
+						<div>
+							<input style="display: none" type="file" name="img" (change)="readUrl($event)" #selectedFile>
+						</div>
+						<div>
+							<img *ngIf="subcategory" [src]="subcategory.photo" >
+						</div>
 						<div class="subcategory-name">{{subcategory.name}}</div>
 					</div>
 
