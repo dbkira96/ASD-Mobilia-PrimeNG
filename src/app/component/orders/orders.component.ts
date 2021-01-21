@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Invoice } from 'src/app/domain/Invoice';
 import { Order } from '../../domain/Order';
 import { OrderDataService } from '../../services/data/OrderData.service';
 
@@ -10,6 +11,7 @@ import { OrderDataService } from '../../services/data/OrderData.service';
   providers: [MessageService]
 })
 export class OrdersComponent implements OnInit {
+  invoice: Invoice;
   order: Order;
   orders: Order[];
   userDialog: boolean;
@@ -22,6 +24,33 @@ export class OrdersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.invoice =  {id: 0,
+    order_id: 0,
+    typeDocument: "",
+    documentNumber: 0,
+    documentDate: new Date(),
+    transmissionAddress: "",
+    causal: "",
+    userName: "",
+    userCF: "",
+    userAddress: "",
+    userCap: 0,
+    userCity: "",
+    userProvince: "",
+    vatCollectability: "",
+    additionalCosts: "",
+    totalTaxable: 0.0,
+    totalTaxes: 0.0,
+    stampData: "",
+    discount: 0.0,
+    totalDocument: 0,
+    methodPayment: "",
+    statusPayment: "",
+    iban: "",
+    bankName: "",
+    expirationDate: new Date(),
+    netToPay: 0.0
+  }
     this.orderDataService.getOrders().subscribe(data => this.orders = data);
   }
 
@@ -61,14 +90,23 @@ export class OrdersComponent implements OnInit {
 
  
 
-  openUserDialog(order: Order) {
-    this.order = order;
+  openUserDialog(order:Order) {
+   this.order = order;
+   
+    
     this.userDialog = true;
   }
 
   saveUserAndPdf() {
-    
-    this.orderDataService.downloadPdf(this.order, this.nameUser, this.addressUser, this.paymentMethodUser);
+    var x = this.order.id;
+    var y: number = +x;
+    this.invoice.order_id=y;
+    this.invoice.statusPayment="COMPLETED";
+    this.invoice.methodPayment="CASH";
+    this.orderDataService.downloadPdf(this.invoice,this.order);
    
+  }
+  hideDialog() {
+    this.userDialog = false;
   }
 }
