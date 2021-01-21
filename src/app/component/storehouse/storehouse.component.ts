@@ -24,6 +24,8 @@ export class StorehouseComponent implements OnInit {
   shelfs: Shelf[] = [];
   places:Place[] = [];
   s:number[] = [];
+  selectedShelf:Shelf={};
+  placeName:string="placeholder"
 
   constructor(
     private productData: ProductDataService,
@@ -101,7 +103,7 @@ export class StorehouseComponent implements OnInit {
   }
 
   addShelf(){
-    console.log("sono nel addShelf");
+    
     this.placeData.newShelf(new Shelf(undefined)).subscribe( 
       data => {
 
@@ -110,7 +112,10 @@ export class StorehouseComponent implements OnInit {
         var s:Shelf = data;
         var p:Place = new Place();
         p.shelf = s
-        this.placeData.newPlace(p).subscribe()
+        p.nome="placeholder"
+        this.placeData.newPlace(p).subscribe(
+          data=>{this.shelfs.push(data.shelf)}
+        )
       }
     );
     
@@ -121,16 +126,24 @@ export class StorehouseComponent implements OnInit {
   }
   addPlaceToShelf(s:Shelf){
      var p:Place = new Place();
+     p.nome=this.placeName;
      p.shelf = s;
+     console.log(p)
      this.placeData.newPlace(p).subscribe(
       data => {
                 this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place added' });
+                console.log(data)
+                data.nome=this.placeName
+                this.selectedShelf.places.push(data)
               }
      )
 
   }
   deletePlace(id:number){
     console.log(id)
+    var p= this.selectedShelf.places.find(p=>p.id==id)
+    
+    this.selectedShelf.places.splice(this.selectedShelf.places.indexOf(p));
      this.placeData.delete(id).subscribe(
        data => { this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place deleted' });},
 
@@ -138,6 +151,9 @@ export class StorehouseComponent implements OnInit {
      );
   }
 
+  selShelf(s:Shelf){
+    this.selectedShelf=s
+  }
 
   refresh(): void {
     window.location.reload();

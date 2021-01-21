@@ -18,6 +18,9 @@ getPlace(id: number): Observable<Place> {
 getAllPlaces(){
   return this.http.get<Place[]>(`${environment.API_URL}/storehouse/places`);
 }
+getAllShelves(){
+  return this.http.get<Shelf[]>(`${environment.API_URL}/storehouse/shelf/getAll`);
+}
 
 delete(id:number) {
   return this.http.delete(`${environment.API_URL}/storehouse/place/delete?id=${id}`);
