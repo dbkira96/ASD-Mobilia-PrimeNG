@@ -48,40 +48,16 @@ export class StorehouseComponent implements OnInit {
 
     this.placeData.getAllPlaces().subscribe(
       data=>{
-        this.places = data;
-        console.log(this.places);
-        console.log("shelfs:");
-
-
-      
-
-      for(var i = 0; i < this.places.length;i++)
-      {
-        this.s.push(this.places[i].shelf.id);
-        
-      }
-
-        this.s.sort();
-
-        var unique = this.s.filter((v, i, a) => a.indexOf(v) === i); 
-        for(var i = 0; i < unique.length;i++)
-        {
-          this.shelfs.push(new Shelf(unique[i]));
-        }
-
-
-      for(var i = 0 ; i < this.places.length;i++)
-      {
-          var p = this.places[i];
-      //  for(var k = 0; i < this.shelfs.length;k++)
-       // {}
-       var s1 : Shelf = this.shelfs.find(s2 => s2.id == p.shelf.id)
-       s1.places.push(p)
-      }
-
-      console.log(this.shelfs);
-        
-
+        this.places=data
+        this.placeData.getAllShelves().subscribe(
+          data=>{this.shelfs=data
+            this.places.forEach(p=>{
+             var s1= this.shelfs.find(s=>s.id==p.shelf.id)
+              if(s1.places==null) s1.places=[]
+              s1.places.push(p);
+            })
+          }
+        )
       }
     )
     
@@ -143,9 +119,11 @@ export class StorehouseComponent implements OnInit {
     console.log(id)
     var p= this.selectedShelf.places.find(p=>p.id==id)
     
-    this.selectedShelf.places.splice(this.selectedShelf.places.indexOf(p));
+    
      this.placeData.delete(id).subscribe(
-       data => { this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place deleted' });},
+       data => { this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place deleted' });
+       this.selectedShelf.places.splice(this.selectedShelf.places.indexOf(p));
+      },
 
        err => {this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Impossible delete this place' });}
      );
