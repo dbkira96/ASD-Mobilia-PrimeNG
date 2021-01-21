@@ -1,9 +1,28 @@
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+ 
+  <div>
+    <div class="p-d-flex">
+      <a href="/home">
+        <b>
+          <img src="assets/images/logo3.png" alt="home" />
+        </b>
+        <span>
+          <img src="assets/images/logo-text-mobilia.png" alt="home" />
+        </span>
+      </a>
+    </div>
+  </div>
+  <p-menu  [model]="items" [style]="{'width':'15rem', 'margin-top':'60px'}" ></p-menu>
+  
+</p-sidebar>
 <p-toolbar>
   <div class="p-toolbar-group-left">
     <button #btn type="button" pButton icon="pi pi-bars" class="p-button-raised p-button-text"
-      (click)="menu.toggle($event)">
+      (click)="visibleSidebar1 = true">
     </button>
-    <p-slideMenu #menu [model]="items" [popup]="true" [viewportHeight]="250"></p-slideMenu>
+   
+   <!-- -->
+
   </div>
 
   <div>

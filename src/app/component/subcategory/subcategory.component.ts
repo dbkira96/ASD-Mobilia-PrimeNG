@@ -15,6 +15,8 @@ export class SubcategoryComponent implements OnInit {
   category:Category; 
   responsiveOptions: { breakpoint: string; numVisible: number; numScroll: number; }[];
   error;
+  subcategory: Subcategory = {};
+  imageSrc: string;
   constructor(
     private activatedRouted: ActivatedRoute,
     private categoryService: CategoryService) {
@@ -51,6 +53,24 @@ export class SubcategoryComponent implements OnInit {
     const id = +this.activatedRouted.snapshot.params.id;
     this.category={id: id, name:""};
     this.getAllSubcategoryByCategory(id);
+  }
+
+  readUrl(event: any) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      if (this.subcategory) {
+        reader.onload = () =>
+          this.subcategory.photo = reader.result as string;
+
+      }
+      else {
+        reader.onload = () =>
+          this.imageSrc = reader.result as string;
+      }
+    }
+
   }
 
 

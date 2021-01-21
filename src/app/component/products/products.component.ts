@@ -16,7 +16,7 @@ import { VendorService } from 'src/app/services/vendor.service';
 export class ProductsComponent implements OnInit {
   productDialog: boolean;
   products: Product[] = [];
-  product: Product = { subcategory: {} };
+  product: Product = {};
   imageSrc:string;
   selectedSub: string;
   submitted: boolean;
@@ -40,10 +40,10 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.product = {
-      id: 0, name: "", brand: "", price: 0, color: "", size: "", stock: 0,
+      id: 0, name: "", brand: "", color: "", size: "",
       subcategory: { id: 0, name: "", category: { id: 0, name: "" } },
       vendor: { id: 0, name: "", VATNumber: "", email: "", phone: 0 },
-      place: { id: 0, shelf: { id: 0 } }
+      place: { shelf: { id: 0 } }
     };
 
     this.productData.getAllProducts().subscribe(
@@ -68,10 +68,10 @@ export class ProductsComponent implements OnInit {
 
   openNew() {
     this.product = {
-      id: 0, name: "", brand: "", price: 0, color: "", size: "", stock: 0,
+      id: 0, name: "", brand: "", color: "", size: "",
       subcategory: { id: 0, name: "", category: { id: 0, name: "" } },
       vendor: { id: 0, name: "", VATNumber: "", email: "", phone: 0 },
-      place: { id: 0, shelf: { id: 0 } }
+      place: { shelf: { id: 0 } }
     };
     this.productDialog = true;
     this.newproduct=true;

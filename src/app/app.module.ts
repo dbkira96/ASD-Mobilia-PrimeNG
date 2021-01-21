@@ -11,7 +11,6 @@ import {ToastModule} from 'primeng/toast';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
 import {FieldsetModule} from 'primeng/fieldset';
-import {TabMenuModule} from 'primeng/tabmenu';
 import {ToolbarModule} from 'primeng/toolbar';
 import {DataViewModule} from 'primeng/dataview';
 import {DropdownModule} from 'primeng/dropdown';
@@ -38,10 +37,12 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { SubcategoryComponent } from './component/subcategory/subcategory.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-import { SlideMenuModule } from 'primeng/slidemenu';
 import { UsersComponent } from './component/users/users.component';
 import {RatingModule} from 'primeng/rating';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
+
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
   declarations: [							
@@ -58,7 +59,8 @@ import {RatingModule} from 'primeng/rating';
       CategoryComponent,
       OrdersComponent,
       UsersComponent,
-      SubcategoryComponent
+      SubcategoryComponent,
+      
    ],
   imports: [
     ReactiveFormsModule,
@@ -71,7 +73,6 @@ import {RatingModule} from 'primeng/rating';
     InputTextModule,
     PasswordModule,
     ToastModule,
-    TabMenuModule,
     BrowserAnimationsModule,
     TableModule,
     CarouselModule,
@@ -87,10 +88,14 @@ import {RatingModule} from 'primeng/rating';
     RadioButtonModule,
     BrowserModule,
     BrowserAnimationsModule,
-    SlideMenuModule,
     ButtonModule,
     RatingModule,
-
+    BrowserAnimationsModule,
+    SidebarModule,
+    ButtonModule,
+    MenuModule,
+    RippleModule,
+    
 
   ],
   providers: [],

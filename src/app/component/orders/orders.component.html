@@ -77,25 +77,220 @@
 </p-table>
 
 <p-toast position="top-center" key="tc" (onClose)="refresh()"></p-toast>
-<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}" header="Invoice Recipient" [modal]="true"
+<p-dialog [(visible)]="userDialog" [style]="{width: '450px'}"  [modal]="true"
     styleClass="p-fluid" >
-    <div class="p-field">
-        <label for="nameUser">Full Name
-        </label>
-        <input type="text" pInputText id="nameUser"  [(ngModel)]='nameUser' [value]='nameUser'  />
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && saveUserAndPdf() " novalidate>
+
+        <!--validation for user data-->
+        <h5>Customer data invoice
+        </h5>
+        <div class="form-group">
+            <label for="name">Full Name User</label>
+            <input pInputText required autofocus type="text" class="form-control" id="name" name="name" #name="ngModel"
+                [(ngModel)]="invoice.userName" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" />
+            <div *ngIf="name.dirty  && name.touched && name.invalid">
+                <div class="alert-danger" *ngIf="name.errors.required">
+                    The field Full Name User is required
+                </div>
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            <label for="userAddress">User Address</label>
+            <input pInputText required autofocus type="text" class="form-control" id="userAddress" name="userAddress" #userAddress="ngModel"
+                [(ngModel)]="invoice.userAddress" [ngClass]="{ 'is-invalid': f.submitted && userAddress.invalid }" />
+            <div *ngIf="  userAddress.dirty  &&   userAddress.touched &&  userAddress.invalid">
+                <div class="alert-danger" *ngIf="userAddress.errors.required">
+                    The field user address is required
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="userCap">User Cap</label>
+            <input pInputText required autofocus type="text" class="form-control" id="userCap" name="userCap" #userCap="ngModel"
+                [(ngModel)]="invoice.userCap" [ngClass]="{ 'is-invalid': f.submitted && userCap.invalid }" />
+            <div *ngIf="  userCap.dirty  &&   userCap.touched &&  userCap.invalid">
+                <div class="alert-danger" *ngIf="userCap.errors.required">
+                    The field user Cap is required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="userCity">User City</label>
+            <input pInputText required autofocus type="text" class="form-control" id="userCity" name="userCity" #userCity="ngModel"
+                [(ngModel)]="invoice.userCity" [ngClass]="{ 'is-invalid': f.submitted && userCity.invalid }" />
+            <div *ngIf="  userCity.dirty  &&   userCity.touched &&  userCity.invalid">
+                <div class="alert-danger" *ngIf="userCity.errors.required">
+                    The field user City is required
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="userProvince">User Province</label>
+            <input pInputText required autofocus type="text" class="form-control" id="userProvince" name="userProvince" #userProvince="ngModel"
+                [(ngModel)]="invoice.userProvince" [ngClass]="{ 'is-invalid': f.submitted && userProvince.invalid }" />
+            <div *ngIf="  userProvince.dirty  &&   userProvince.touched &&  userProvince.invalid">
+                <div class="alert-danger" *ngIf="userProvince.errors.required">
+                    The field user Province is required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="userCF">User CF</label>
+            <input pInputText required autofocus type="text" class="form-control" id="userCF" name="userCF" #userCF="ngModel"
+                [(ngModel)]="invoice.userCF" [ngClass]="{ 'is-invalid': f.submitted && userCF.invalid }" />
+            <div *ngIf="  userCF.dirty  &&   userCF.touched &&  userCF.invalid">
+                <div class="alert-danger" *ngIf="userCF.errors.required">
+                    The field user CF is required
+                </div>
+            </div>
+        </div>
+
+    <!--validation for invoice data-->
+    <h5>Invoice data</h5>
+    <div class="form-group">
+        <label for="typeDocument">Type of Document</label>
+        <input pInputText required autofocus type="text" class="form-control" id="typeDocument" name="typeDocument" #typeDocument="ngModel"
+            [(ngModel)]="invoice.typeDocument" [ngClass]="{ 'is-invalid': f.submitted && typeDocument.invalid }" />
+        <div *ngIf="  typeDocument.dirty  &&   typeDocument.touched &&  typeDocument.invalid">
+            <div class="alert-danger" *ngIf="typeDocument.errors.required">
+                The field type of document is required
+            </div>
+        </div>
     </div>
     
-    <div class="p-field">
-        <label for="addressUser">Address</label>
-        <input type="text" pInputText id="addressUser" [(ngModel)]='addressUser' [value]='addressUser'  />
+    <div class="form-group">
+        <label for="documentNumber">Document Number</label>
+        <input pInputText required autofocus type="text" class="form-control" id="documentNumber" name="documentNumber" #documentNumber="ngModel"
+            [(ngModel)]="invoice.documentNumber" [ngClass]="{ 'is-invalid': f.submitted && documentNumber.invalid }" />
+        <div *ngIf="  documentNumber.dirty  &&   documentNumber.touched &&  userProvince.invalid">
+            <div class="alert-danger" *ngIf="documentNumber.errors.required">
+                The field document number is required
+            </div>
+        </div>
     </div>
+
+    <div class="form-group">
+        <label for="documentDate">document Date</label>
+        <input pInputText required autofocus type="text" class="form-control" id="documentDate" name="documentDate" #documentDate="ngModel"
+            [(ngModel)]="invoice.documentDate" [ngClass]="{ 'is-invalid': f.submitted && documentDate.invalid }" />
+        <div *ngIf="  documentDate.dirty  &&   documentDate.touched &&  documentDate.invalid">
+            <div class="alert-danger" *ngIf="documentDate.errors.required">
+                The field Document Date is required
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="transmissionAddress">Transmission Address</label>
+        <input pInputText required autofocus type="text" class="form-control" id="transmissionAddress" name="transmissionAddress" #transmissionAddress="ngModel"
+            [(ngModel)]="invoice.transmissionAddress" [ngClass]="{ 'is-invalid': f.submitted && transmissionAddress.invalid }" />
+        <div *ngIf="  transmissionAddress.dirty  &&   transmissionAddress.touched &&  transmissionAddress.invalid">
+            <div class="alert-danger" *ngIf="transmissionAddress.errors.required">
+                The field transmission address is required
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="causal">Causal</label>
+        <input pInputText required autofocus type="text" class="form-control" id="causal" name="causal" #causal="ngModel"
+            [(ngModel)]="invoice.causal" [ngClass]="{ 'is-invalid': f.submitted && causal.invalid }" />
+        <div *ngIf="  causal.dirty  &&   causal.touched &&  causal.invalid">
+            <div class="alert-danger" *ngIf="causal.errors.required">
+                The field causal is required
+            </div>
+        </div>
+    </div>
+
+    <!--payment-->
+    <h5>Payment</h5>
+    <div class="form-group">
+        <label for="methodPayment">Method Payment</label>
+        <input pInputText required autofocus type="text" class="form-control" id="methodPayment" name="methodPayment" #methodPayment="ngModel"
+            [(ngModel)]="invoice.methodPayment" [ngClass]="{ 'is-invalid': f.submitted && methodPayment.invalid }" />
+        <div *ngIf="  methodPayment.dirty  &&   methodPayment.touched &&  methodPayment.invalid">
+            <div class="alert-danger" *ngIf="methodPayment.errors.required">
+                The field method of payment is required
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="iban">Iban</label>
+        <input pInputText required autofocus type="text" class="form-control" id="iban" name="iban" #iban="ngModel"
+            [(ngModel)]="invoice.iban" [ngClass]="{ 'is-invalid': f.submitted && iban.invalid }" />
+        <div *ngIf="  iban.dirty  &&   iban.touched &&  iban.invalid">
+            <div class="alert-danger" *ngIf="iban.errors.required">
+                The field iban is required
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="bankName">Bank Name</label>
+        <input pInputText required autofocus type="text" class="form-control" id="bankName" name="bankName" #bankName="ngModel"
+            [(ngModel)]="invoice.bankName"  />
+    
+    </div>
+    <div class="form-group">
+        <label for="expirationDate">Expiration Date</label>
+        <input pInputText required autofocus type="text" class="form-control" id="expirationDate" name="expirationDate" #expirationDate="ngModel"
+            [(ngModel)]="invoice.expirationDate" [ngClass]="{ 'is-invalid': f.submitted && expirationDate.invalid }" />
+        <div *ngIf="  expirationDate.dirty  &&   iban.touched &&  expirationDate.invalid">
+            <div class="alert-danger" *ngIf="expirationDate.errors.required">
+                The field expirationDate is required
+            </div>
+        </div>
+    </div>
+
   
-    <div class="p-field">
-        <label for="paymentMethodUser">Payment Method</label>
-        <input type="text"  pInputText id="paymentMethodUser"  [(ngModel)]='paymentMethodUser' [value]='paymentMethodUser' />
+   
+    
+
+    <!--summary-->
+  
+    <div class="form-group">
+        <label for="vatCollectability">VAT Collectability</label>
+        <input pInputText required autofocus type="text" class="form-control" id="vatCollectability" name="vatCollectability" #vatCollectability="ngModel"
+            [(ngModel)]="invoice.vatCollectability" [ngClass]="{ 'is-invalid': f.submitted && vatCollectability.invalid }" />
+        <div *ngIf="  vatCollectability.dirty  &&   vatCollectability.touched &&  vatCollectability.invalid">
+            <div class="alert-danger" *ngIf="vatCollectability.errors.required">
+                The field  vatCollectability is required
+            </div>
+        </div>
     </div>
-    <ng-template pTemplate="footer">
-        <button pButton Button pRipple label="Save" icon="pi pi-check" class="p-button-text"
-        (click)="saveUserAndPdf()" ></button>
-    </ng-template>
+    <div class="form-group">
+        <label for="additionalCosts">Additional Costs</label>
+        <input pInputText required autofocus type="text" class="form-control" id="additionalCosts" name="additionalCosts" #additionalCosts="ngModel"
+            [(ngModel)]="invoice.additionalCosts"  />
+         
+    </div>
+    <div class="form-group">
+        <label for="stampData">Stamp Data</label>
+        <input pInputText required autofocus type="text" class="form-control" id="stampData" name="stampData" #stampData="ngModel"
+            [(ngModel)]="invoice.stampData"  />
+     
+    </div>
+
+    <div class="form-group">
+        <label for="discount">Discount</label>
+        <input pInputText required autofocus type="text" class="form-control" id="discount" name="discount" #discount="ngModel"
+            [(ngModel)]="invoice.discount"  />
+        
+    </div>
+ 
+   
+    <div class="form-group">
+        <button pButton class="p-button-danger" label="Cancel" (click)="hideDialog()" >
+        </button>
+    </div>
+    <div class="form-group">
+        <button pButton class="p-button-success" label="Save" type="submit" [disabled]="f.invalid"  >
+        </button>
+    </div>
+</form>
 </p-dialog>
