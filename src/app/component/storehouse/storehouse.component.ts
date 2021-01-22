@@ -135,10 +135,10 @@ export class StorehouseComponent implements OnInit {
     
      this.placeData.delete(id).subscribe(
        data => { this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place deleted' });
-       this.selectedShelf.places.splice(this.selectedShelf.places.indexOf(p));
+       this.selectedShelf.places.splice(this.selectedShelf.places.indexOf(p),1);
       },
 
-       err => {this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Impossible delete this place' });}
+       err => {this.messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: 'Impossible delete this place, remove the products before delete the place!' });}
      );
   }
 
