@@ -7,6 +7,6 @@ export class Shelf{
     note?:string;
     places?:Place[];
 
-    constructor(i:number){this.id = i; this.places =[]}
+    constructor(i:number,n:string){this.id = i;this.nome = n; this.places =[]}
 
 }

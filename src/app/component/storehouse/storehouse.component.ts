@@ -26,6 +26,7 @@ export class StorehouseComponent implements OnInit {
   s:number[] = [];
   selectedShelf:Shelf={};
   placeName:string="placeholder"
+  shelfName:string = "placeholder"
 
   constructor(
     private productData: ProductDataService,
@@ -52,6 +53,7 @@ export class StorehouseComponent implements OnInit {
         this.placeData.getAllShelves().subscribe(
           data=>{this.shelfs=data
             this.places.forEach(p=>{
+              //metto i posti negli scaffali
              var s1= this.shelfs.find(s=>s.id==p.shelf.id)
               if(s1.places==null) s1.places=[]
               s1.places.push(p);
@@ -79,20 +81,29 @@ export class StorehouseComponent implements OnInit {
   }
 
   addShelf(){
+
+    var s1 = new Shelf(undefined,this.shelfName)
+    s1.places = []
+     var p:Place = new Place();
+     p.nome = "default name"
+     s1.places.push(p)
     
-    this.placeData.newShelf(new Shelf(undefined)).subscribe( 
+    this.placeData.newShelf(s1).subscribe( 
       data => {
 
         this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'shelf added' });
         console.log(data);
-        var s:Shelf = data;
-        var p:Place = new Place();
-        p.shelf = s
-        p.nome="placeholder"
-        this.placeData.newPlace(p).subscribe(
-          data=>{this.shelfs.push(data.shelf)}
-        )
+       // var s:Shelf = data;
+        //p.shelf = s
+        //p.nome="placeholder"
+        //data.nome = this.shelfName
+      //  this.placeData.newPlace(p).subscribe(
+       //   data=>{this.shelfs.push(data.shelf)}
+      //  )
+
+      this.shelfs.push(data)
       }
+
     );
     
   }
@@ -110,6 +121,8 @@ export class StorehouseComponent implements OnInit {
                 this.messageService.add({ key: 'tc', severity: 'success', summary: 'Service Message', detail: 'place added' });
                 console.log(data)
                 data.nome=this.placeName
+                if(this.selectedShelf.places == null)
+                {this.selectedShelf.places = [];}
                 this.selectedShelf.places.push(data)
               }
      )

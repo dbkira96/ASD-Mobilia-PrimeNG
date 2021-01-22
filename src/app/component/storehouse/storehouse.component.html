@@ -4,16 +4,17 @@
     <p-card class="p-d-flex p-flex-column p-m-2">
         <p-toolbar styleClass="p-mb-4">
             <ng-template pTemplate="left">
-                <button pButton pRipple label="Add shelf" icon="pi pi-plus" class="p-button-success p-mr-2"
-                    (click)="addShelf()"></button>
-                    
+                <div>
+                 
+                </div> 
+                
             </ng-template>
             <ng-template pTemplate="right">
 
             </ng-template>
         </p-toolbar>
 
-
+               
         <p-table [value]="shelfs" dataKey="id">
             <ng-template pTemplate="header">
                 <tr>
@@ -21,7 +22,17 @@
                     <th pSortableColumn="Shelf">Shelf <p field="Shelf"></p></th>
                     <th > </th>
                 </tr>
+                <tr>
+                    <div class="p-inputgroup">     
+            
+                        <button type="button" pButton pRipple icon="pi pi-plus"  (click)="addShelf()" styleClass="p-button-warn" ></button> 
+                                    <input type="text" pInputText [(ngModel)]="shelfName" placeholder="Keyword">
+                                  </div> 
+                </tr>
             </ng-template>
+            
+            
+
             <ng-template pTemplate="body" let-Shelf >
                 <tr>
                     
@@ -31,6 +42,8 @@
                 
                 </tr>
             </ng-template>
+
+            
             
         </p-table>
     </p-card>
@@ -39,7 +52,7 @@
             <p-table [value]="selectedShelf.places" dataKey="id">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="place">Place <p-sortIcon field="place"></p-sortIcon></th>
+                        <th pSortableColumn="place">Place <p field="place"></p></th>
                         
                         <th style="width: 4rem"></th>
                         <th></th>
